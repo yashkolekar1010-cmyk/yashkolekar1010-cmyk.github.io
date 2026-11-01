@@ -294,6 +294,16 @@ a { color: inherit; text-decoration: none; }
 .burger { display: none; }
 @media (max-width: 900px) { .burger { display: grid; } }
 
+/* Below ~560px the brand + résumé + theme + burger no longer fit on
+   one row and the burger gets pushed off-screen. The résumé is the
+   one that can go: it is still in the hero card and in Contact. */
+@media (max-width: 560px) {
+  #nav-cv { display: none; }
+  .brand { font-size: 1.14rem; }
+  .brand small { display: none; }
+  .nav-in { gap: .75rem; }
+}
+
 .sheet {
   position: fixed; inset: 0; z-index: 99;
   background: color-mix(in oklab, var(--bg) 96%, transparent);
@@ -772,7 +782,9 @@ a { color: inherit; text-decoration: none; }
 @media (max-width: 900px) { .contact-grid { grid-template-columns: 1fr; } }
 
 .reach { list-style: none; display: grid; gap: .2rem; margin-bottom: 1.6rem; }
-.reach a, .reach span {
+/* direct children of the li only — `.reach span` would also catch the
+   inner text span and lay its <small> out beside the value, not under */
+.reach li > a, .reach li > span {
   display: flex; align-items: center; gap: .9rem;
   padding: .78rem 0; border-bottom: 1px solid var(--line);
   font-size: var(--t-sm);
@@ -893,7 +905,7 @@ a { color: inherit; text-decoration: none; }
       <a class="nav-link" href="#education">Education</a>
       <a class="nav-link" href="#contact">Contact</a>
     </nav>
-    <a class="btn btn-line btn-sm" id="nav-cv" href="Yash_Kolekar_Agentic_AI_Developer_Resume.pdf" target="_blank" rel="noopener">
+    <a class="btn btn-line btn-sm" id="nav-cv" href="Yash_Kolekar_Resume.pdf" target="_blank" rel="noopener">
       <svg aria-hidden="true"><use href="#i-dl"/></svg><span id="nav-cv-label">Résumé</span>
     </a>
     <button class="icon-btn" id="theme" type="button" aria-label="Switch colour theme">
@@ -958,7 +970,7 @@ a { color: inherit; text-decoration: none; }
         </div>
         <div class="tracks-foot">
           <small id="track-hint">Reorders projects &amp; stack</small>
-          <a class="btn btn-line btn-sm" id="track-cv" href="Yash_Kolekar_Agentic_AI_Developer_Resume.pdf" target="_blank" rel="noopener">
+          <a class="btn btn-line btn-sm" id="track-cv" href="Yash_Kolekar_Resume.pdf" target="_blank" rel="noopener">
             <svg aria-hidden="true"><use href="#i-dl"/></svg><span id="track-cv-label">Résumé</span>
           </a>
         </div>
@@ -1423,7 +1435,7 @@ a { color: inherit; text-decoration: none; }
             <svg aria-hidden="true"><use href="#i-pin"/></svg>
             <span>Pune, India<small>Open to remote · immediate joiner</small></span></span></li>
         </ul>
-        <a class="btn btn-fill" id="contact-cv" href="Yash_Kolekar_Agentic_AI_Developer_Resume.pdf" target="_blank" rel="noopener">
+        <a class="btn btn-fill" id="contact-cv" href="Yash_Kolekar_Resume.pdf" target="_blank" rel="noopener">
           <svg aria-hidden="true"><use href="#i-dl"/></svg> <span id="contact-cv-label">Download résumé</span>
         </a>
       </div>
@@ -1604,42 +1616,46 @@ a { color: inherit; text-decoration: none; }
      stack rows lead, the project order and which résumé variant
      is offered. Project order follows the same rule I use when
      tailoring the PDF.                                          */
+  /* Each track CAN serve its own résumé variant. Only one PDF
+     currently matches the v11.2 fact base (correct email, no GitHub
+     link), so every track points at it until the other variants are
+     regenerated — better one right résumé than three wrong ones. */
   var TRACKS = {
     'ai-engineer': {
       role:  'AI / GenAI Engineer',
       note:  'Generative AI in production — RAG pipelines, AI agents and LLM services built on Python, FastAPI, LangChain and LangGraph, shipped on AWS.',
       order: [1, 3, 2],
       lead:  ['genai', 'agents', 'retrieval', 'backend'],
-      cv:    'Yash_Kolekar_Agentic_AI_Developer_Resume.pdf',
+      cv:    'Yash_Kolekar_Resume.pdf',
       short: 'Résumé',
-      long:  'Download résumé · Agentic AI'
+      long:  'Download résumé'
     },
     'agentic': {
       role:  'Agentic AI Engineer',
       note:  'Agent loops that call real tools — LangGraph and CrewAI orchestration, function calling, multi-turn memory, and escalation to a human instead of a guess.',
       order: [3, 1, 2],
       lead:  ['agents', 'retrieval', 'genai'],
-      cv:    'Yash_Kolekar_Agentic_AI_Developer_Resume.pdf',
+      cv:    'Yash_Kolekar_Resume.pdf',
       short: 'Résumé',
-      long:  'Download résumé · Agentic AI'
+      long:  'Download résumé'
     },
     'data-scientist': {
       role:  'Data Scientist',
       note:  'Modelling and analysis — classification, clustering and forecasting with Scikit-learn and PyTorch, on top of SQL, ETL, pandas and NumPy.',
       order: [2, 1, 3],
       lead:  ['ml', 'data', 'core'],
-      cv:    'Yash_Kolekar_Data_Scientist_Resume.pdf',
+      cv:    'Yash_Kolekar_Resume.pdf',
       short: 'Résumé',
-      long:  'Download résumé · Data Science'
+      long:  'Download résumé'
     },
     'ml-engineer': {
       role:  'AI / ML Engineer',
       note:  'Models trained, served and watched — classical ML and GenAI side by side, behind FastAPI services in Docker on AWS, with CI/CD and monitoring.',
       order: [1, 3, 2],
       lead:  ['ml', 'genai', 'backend', 'cloud'],
-      cv:    'Yash_Kolekar_Data_Scientist_Resume.pdf',
+      cv:    'Yash_Kolekar_Resume.pdf',
       short: 'Résumé',
-      long:  'Download résumé · Data Science'
+      long:  'Download résumé'
     }
   };
 
