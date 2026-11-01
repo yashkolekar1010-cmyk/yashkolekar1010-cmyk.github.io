@@ -1,55 +1,16 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import { Info, X } from 'lucide-react'
 import { GithubIcon } from './BrandIcons'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { projects } from '../data/profile'
 import type { Project, Track } from '../data/profile'
+import { useTilt } from '../hooks/useTilt'
 import { Btn, Chip, KeyChip, SectionHead } from './ui'
 
 const ease = [0.22, 1, 0.36, 1] as const
 
-/** Pointer-driven rotateX/rotateY. Inner layers sit on different Z, so the
- *  rotation reads as depth rather than a flat skew. Fine pointers only. */
-function useTilt(enabled: boolean) {
-  const ref = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    const el = ref.current
-    if (!el || !enabled) return
-    if (!matchMedia('(hover: hover) and (pointer: fine)').matches) return
-
-    let frame = 0
-    let rx = 0
-    let ry = 0
-    const apply = () => {
-      frame = 0
-      el.style.transform = `rotateX(${rx.toFixed(2)}deg) rotateY(${ry.toFixed(2)}deg)`
-    }
-    const move = (e: PointerEvent) => {
-      const b = el.getBoundingClientRect()
-      ry = ((e.clientX - b.left) / b.width - 0.5) * 7
-      rx = ((e.clientY - b.top) / b.height - 0.5) * -5
-      if (!frame) frame = requestAnimationFrame(apply)
-    }
-    const leave = () => {
-      if (frame) cancelAnimationFrame(frame)
-      frame = 0
-      el.style.transform = ''
-    }
-    el.addEventListener('pointermove', move)
-    el.addEventListener('pointerleave', leave)
-    return () => {
-      el.removeEventListener('pointermove', move)
-      el.removeEventListener('pointerleave', leave)
-      if (frame) cancelAnimationFrame(frame)
-    }
-  }, [enabled])
-
-  return ref
-}
-
 function Card({ p, pos, calm, onOpen }: { p: Project; pos: number; calm: boolean; onOpen: () => void }) {
-  const tilt = useTilt(!calm)
+  const tilt = useTilt(!calm, 13)
 
   return (
     <article
@@ -64,22 +25,21 @@ function Card({ p, pos, calm, onOpen }: { p: Project; pos: number; calm: boolean
     >
       <div
         ref={tilt}
-        className="glass glass-hover relative grid gap-6 rounded-2xl p-6 md:grid-cols-[1fr_0.8fr] md:p-8"
-        style={{ transformStyle: 'preserve-3d', willChange: 'transform' }}
+        className="glass tilt3d relative grid gap-6 rounded-2xl p-6 md:grid-cols-[1fr_0.8fr] md:p-8"
       >
         <span
           className="display pointer-events-none absolute top-4 right-5 select-none"
           style={{
             fontSize: 'clamp(2.4rem,2rem+2.6vw,4rem)',
             color: 'var(--line)',
-            transform: 'translateZ(14px)',
+            transform: 'translateZ(26px)',
           }}
           aria-hidden
         >
           {String(p.id).padStart(2, '0')}
         </span>
 
-        <div style={{ transform: 'translateZ(26px)' }}>
+        <div style={{ transform: 'translateZ(45px)' }}>
           <p className="mono mb-2.5" style={{ color: 'var(--cyan)' }}>
             {p.kind}
           </p>
@@ -94,7 +54,7 @@ function Card({ p, pos, calm, onOpen }: { p: Project; pos: number; calm: boolean
           </p>
         </div>
 
-        <div className="self-end" style={{ transform: 'translateZ(40px)' }}>
+        <div className="self-end" style={{ transform: 'translateZ(70px)' }}>
           {p.demoNote && (
             <p
               className="mb-4 flex items-start gap-2 rounded-lg px-3 py-2.5 text-[0.74rem]"

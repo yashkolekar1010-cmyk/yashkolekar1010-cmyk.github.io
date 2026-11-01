@@ -1,6 +1,6 @@
 import { ArrowUp, Mail } from 'lucide-react'
 import { GithubIcon, LinkedinIcon } from './components/BrandIcons'
-import { useEffect, useMemo, useState } from 'react'
+import { Suspense, lazy, useEffect, useMemo, useState } from 'react'
 import { About } from './components/About'
 import { Contact } from './components/Contact'
 import { Education } from './components/Education'
@@ -14,6 +14,11 @@ import { navLinks, profile, tracks } from './data/profile'
 import { useActiveSection } from './hooks/useActiveSection'
 import { useReducedMotion } from './hooks/useReducedMotion'
 import { useTheme } from './hooks/useTheme'
+
+/* three.js is ~600 kB: lazy so the copy paints first, and mounted
+   ONCE at app level so the 3D sits behind every section, not just
+   the hero. */
+const Scene3D = lazy(() => import('./three/Scene3D'))
 
 /** Checked once: if a WebGL context cannot be created, the CSS gradient
  *  fallback stands alone rather than mounting a broken canvas. */
@@ -70,20 +75,29 @@ export default function App() {
         Skip to content
       </a>
 
+      {webgl && (
+        <Suspense fallback={null}>
+          <Scene3D calm={calm} />
+        </Suspense>
+      )}
+      {/* sits between the canvas and the content so text keeps its
+          contrast wherever the core happens to drift */}
+      <div className="veil" aria-hidden />
+
       <Nav theme={theme} toggleTheme={toggle} active={active} />
 
-      <main id="main">
-        <Hero calm={calm} track={track} setTrack={setTrack} webgl={webgl} />
+      <main id="main" className="relative z-[1]">
+        <Hero calm={calm} track={track} setTrack={setTrack} />
         <About />
         <Skills track={track} />
         <Experience />
         <Projects track={track} calm={calm} />
-        <HowIWork />
+        <HowIWork calm={calm} />
         <Education />
         <Contact />
       </main>
 
-      <footer style={{ borderTop: '1px solid var(--line)' }}>
+      <footer className="relative z-[1]" style={{ borderTop: '1px solid var(--line)' }}>
         <div className="wrap flex flex-wrap items-center justify-between gap-4 py-8">
           <small style={{ color: 'var(--ink-faint)' }}>
             © {new Date().getFullYear()} {profile.name} — built with React, Three.js and

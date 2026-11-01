@@ -1,13 +1,8 @@
 import { motion } from 'framer-motion'
 import { ArrowRight, Download, Mail } from 'lucide-react'
-import { Suspense, lazy } from 'react'
 import { profile, tracks } from '../data/profile'
 import type { Track } from '../data/profile'
 import { Btn } from './ui'
-
-/* three.js is ~600 kB. Lazy + Suspense keeps it out of the entry chunk so
-   the copy paints first and the scene fades in behind it. */
-const NeuralScene = lazy(() => import('../three/NeuralScene'))
 
 const ease = [0.22, 1, 0.36, 1] as const
 
@@ -15,12 +10,10 @@ export function Hero({
   calm,
   track,
   setTrack,
-  webgl,
 }: {
   calm: boolean
   track: Track
   setTrack: (id: string) => void
-  webgl: boolean
 }) {
   return (
     <section
@@ -28,30 +21,9 @@ export function Hero({
       className="relative flex min-h-[100svh] items-center overflow-hidden pt-32 pb-16"
       aria-label="Introduction"
     >
-      {/* CSS fallback stands on its own if WebGL is unavailable or the
-          scene chunk never loads */}
-      <div
-        className="absolute inset-0 z-0"
-        aria-hidden
-        style={{
-          background:
-            'radial-gradient(120% 90% at 74% 24%, color-mix(in oklab, var(--blue) 24%, transparent) 0%, transparent 56%),' +
-            'radial-gradient(90% 70% at 16% 86%, color-mix(in oklab, var(--violet) 20%, transparent) 0%, transparent 60%)',
-        }}
-      >
-        {webgl && (
-          <Suspense fallback={null}>
-            <NeuralScene calm={calm} />
-          </Suspense>
-        )}
-        {/* keeps the copy legible over the point cloud at every width */}
-        <div
-          className="absolute inset-0"
-          style={{
-            background: 'var(--hero-veil)',
-          }}
-        />
-      </div>
+      {/* The 3D layer is mounted app-wide, so the hero only needs its own
+          veil to keep this block of copy readable over it. */}
+      <div className="absolute inset-0 z-0" aria-hidden style={{ background: 'var(--hero-veil)' }} />
 
       <div className="wrap relative z-10 w-full">
         <div className="grid items-end gap-10 lg:grid-cols-[1.1fr_0.62fr] lg:gap-16">
