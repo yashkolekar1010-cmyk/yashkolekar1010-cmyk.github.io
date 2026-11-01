@@ -1,0 +1,205 @@
+@import "tailwindcss";
+
+/* ══════════════════════════════════════════════════════════════
+   DESIGN TOKENS
+   Deep charcoal + electric blue / cyan / violet. Defined once here
+   and re-declared for the light theme, so no component hard-codes
+   a colour.
+   ══════════════════════════════════════════════════════════════ */
+:root {
+  --bg:          #05070d;
+  --bg-2:        #090d18;
+  --bg-3:        #0e1424;
+
+  --surface:     rgba(150, 180, 255, 0.045);
+  --surface-2:   rgba(150, 180, 255, 0.08);
+  --line:        rgba(150, 180, 255, 0.12);
+  --line-2:      rgba(150, 180, 255, 0.24);
+
+  --ink:         #e9edf8;
+  --ink-dim:     #99a3bd;
+  --ink-faint:   #626c85;
+
+  --cyan:        #22d3ee;
+  --blue:        #4f7cff;
+  --violet:      #a855f7;
+  --accent:      var(--blue);
+  --glow:        rgba(79, 124, 255, 0.40);
+
+  --scene-bg:    #05070d;
+  --scene-a:     #4f7cff;
+  --scene-b:     #22d3ee;
+  --scene-c:     #a855f7;
+  --scene-edge:  #2a3f7a;
+
+  --shadow-lg:   0 30px 80px -40px rgba(0, 0, 0, 0.95);
+
+  /* veil over the hero scene — dark needs only a light wash */
+  --hero-veil: linear-gradient(100deg, var(--bg) 0%,
+               color-mix(in oklab, var(--bg) 70%, transparent) 32%, transparent 64%);
+
+  /* hand-tuned easing — never a bare `ease` */
+  --out:   cubic-bezier(0.22, 1, 0.36, 1);
+  --inout: cubic-bezier(0.65, 0.05, 0.36, 1);
+  --snap:  cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  --gut:   clamp(1.1rem, 0.7rem + 2.2vw, 2.6rem);
+  --sec-y: clamp(4.5rem, 3rem + 6vw, 8rem);
+  --maxw:  1200px;
+}
+
+:root[data-theme="light"] {
+  --bg:        #f3f6fc;
+  --bg-2:      #ffffff;
+  --bg-3:      #e9eefa;
+
+  --surface:   rgba(12, 24, 60, 0.035);
+  --surface-2: rgba(12, 24, 60, 0.06);
+  --line:      rgba(12, 24, 60, 0.11);
+  --line-2:    rgba(12, 24, 60, 0.22);
+
+  --ink:       #0a0f1e;
+  --ink-dim:   #48516c;
+  --ink-faint: #78819c;
+
+  --cyan:      #0e7490;
+  --blue:      #2b5ce6;
+  --violet:    #7c3aed;
+  --accent:    var(--blue);
+  --glow:      rgba(43, 92, 230, 0.25);
+
+  --scene-bg:   #f3f6fc;
+  --scene-a:    #2b5ce6;
+  --scene-b:    #0e7490;
+  --scene-c:    #7c3aed;
+  --scene-edge: #93a7d4;
+
+  --shadow-lg:  0 30px 70px -45px rgba(20, 35, 80, 0.45);
+
+  /* paper needs much heavier cover or the network sits on the copy */
+  --hero-veil: linear-gradient(100deg, var(--bg) 0%,
+               color-mix(in oklab, var(--bg) 93%, transparent) 50%, transparent 82%);
+}
+
+/* ══════════════════════════════════════════════════════════════
+   BASE
+   ══════════════════════════════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5.5rem;
+  -webkit-text-size-adjust: 100%;
+}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: clamp(0.95rem, 0.91rem + 0.2vw, 1.05rem);
+  line-height: 1.68;
+  letter-spacing: -0.004em;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.5s var(--inout), color 0.5s var(--inout);
+}
+
+::selection { background: var(--blue); color: #fff; }
+
+:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+a { color: inherit; text-decoration: none; }
+img, canvas, svg { display: block; max-width: 100%; }
+
+/* ══════════════════════════════════════════════════════════════
+   TYPE
+   ══════════════════════════════════════════════════════════════ */
+.display {
+  font-family: "Space Grotesk", Inter, system-ui, sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1.02;
+}
+
+.mono {
+  font-family: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.grad {
+  background: linear-gradient(104deg, var(--blue), var(--cyan) 48%, var(--violet));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   SURFACES — the glassmorphism layer
+   ══════════════════════════════════════════════════════════════ */
+.glass {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+}
+
+.glass-hover {
+  transition: border-color 0.35s var(--out), background-color 0.35s var(--out),
+              box-shadow 0.45s var(--out), transform 0.45s var(--out);
+}
+.glass-hover:hover {
+  border-color: var(--line-2);
+  background: var(--surface-2);
+  box-shadow: var(--shadow-lg);
+}
+
+/* a soft coloured bloom placed behind sections */
+.bloom {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  pointer-events: none;
+  opacity: 0.5;
+  z-index: 0;
+}
+
+.wrap {
+  width: 100%;
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding-inline: var(--gut);
+}
+
+.section {
+  position: relative;
+  z-index: 1;
+  padding-block: var(--sec-y);
+}
+
+/* a 1px hairline that fades at both ends, instead of a hard rule */
+.hair {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--line-2), transparent);
+}
+
+/* ══════════════════════════════════════════════════════════════
+   REDUCED MOTION — kill loops and transforms, keep the layout
+   ══════════════════════════════════════════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
