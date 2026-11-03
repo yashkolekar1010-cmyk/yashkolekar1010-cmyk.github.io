@@ -6,35 +6,39 @@
 <meta name="description" content="Yash Kolekar, AI/ML Engineer and Data Scientist: RAG pipelines, AI agents and LLM apps shipped with FastAPI, Docker and AWS.">
 <meta property="og:title" content="Yash Kolekar · AI/ML Engineer">
 <meta property="og:description" content="RAG pipelines, AI agents and LLM apps, from data prep to deployment. Guided by Bolt the robot.">
-<meta name="theme-color" content="#090b10">
+<meta name="theme-color" content="#0d1122">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22%3E%3Crect x=%228%22 y=%2210%22 width=%2248%22 height=%2236%22 rx=%2212%22 fill=%22%23f3f1ec%22/%3E%3Crect x=%2215%22 y=%2216%22 width=%2234%22 height=%2224%22 rx=%228%22 fill=%22%2310151e%22/%3E%3Crect x=%2222%22 y=%2222%22 width=%226%22 height=%2211%22 rx=%223%22 fill=%22%237ff6ff%22/%3E%3Crect x=%2236%22 y=%2222%22 width=%226%22 height=%2211%22 rx=%223%22 fill=%22%237ff6ff%22/%3E%3Crect x=%2220%22 y=%2248%22 width=%2224%22 height=%2210%22 rx=%225%22 fill=%22%23ff6b2c%22/%3E%3C/svg%3E">
 <title>Yash Kolekar &amp; Bolt</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..600&family=Figtree:wght@400;500;600&family=JetBrains+Mono:wght@500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=Instrument+Serif:ital@0;1&family=Geist:wght@300..700&family=Geist+Mono:wght@400;500;600&display=swap">
 <style>
-/* Layout: one centered column on a dark 3D night. Bolt the robot lives in the bottom-right corner, reacts to everything,
-   and can be chatted with. Tiny cousin bots, dust and wireframes float behind the page. Every word animates. Dark on purpose. */
+/* Layout: a wide dark 3D night (max 1180px), sections in split and bento grids so it reads like a product, not a résumé.
+   Hero = name + a tilting 3D terminal. Bolt the robot lives in the bottom-right corner; cousin bots, dust and wireframes float behind. */
 :root{
-  --bg:#090b10; --paper:#131821; --paper2:#181e29; --ink:#eaeef4; --soft:#c3cad6; --muted:#8a94a6; --line:#252c39; --line2:#3a4456;
+  --bg:#0d1122; --paper:#151b2d; --paper2:#1b2237; --ink:#eef1f7; --soft:#c4cbdb; --muted:#8e98b0; --line:#262e46; --line2:#39435f;
   --orange:#ff7a3c; --orange-t:#ff9b63; --teal:#46c9d2; --violet:#a493ff; --yellow:#ffcf4a; --green:#3ddc84;
-  --display:"Bricolage Grotesque",ui-sans-serif,system-ui,sans-serif;
-  --body:"Figtree",ui-sans-serif,system-ui,sans-serif;
-  --mono:"JetBrains Mono",ui-monospace,monospace;
+  --sans:"Geist",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"Geist Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+  --display:"Sora","Geist",ui-sans-serif,system-ui,sans-serif;
+  --serif:"Instrument Serif",Georgia,"Times New Roman",serif;
+  --grad:linear-gradient(100deg,#ff9b63 0%,#ff6fa8 52%,#a493ff 100%);
+  --lx:0; --ly:0;
   color-scheme:dark;
 }
 *{box-sizing:border-box}
 html,body{margin:0}
 [hidden]{display:none!important}
 html{scroll-behavior:smooth}
-body{background:radial-gradient(1100px 700px at 75% -10%,#151a25 0%,rgba(9,11,16,0) 65%),var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6;overflow-x:hidden}
+body{background:radial-gradient(900px 620px at 88% -6%,rgba(255,122,60,.17),transparent 62%),radial-gradient(900px 700px at 4% 8%,rgba(70,201,210,.13),transparent 60%),radial-gradient(1200px 800px at 50% 112%,rgba(164,147,255,.16),transparent 62%),linear-gradient(180deg,#0e1226 0%,#11162d 55%,#0d1122 100%);background-attachment:fixed;background-color:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.6;
+  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;overflow-x:hidden}
 a{color:inherit}
 ::selection{background:var(--orange);color:#0b0d12}
 .app{position:relative;z-index:1;overflow-x:clip}
-#reviews{overflow-x:clip}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(28px,env(safe-area-inset-left,0px));padding-right:max(28px,env(safe-area-inset-right,0px))}
 
 /* background layers */
 #bg{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;display:block}
-.spot{position:fixed;left:0;top:0;width:760px;height:760px;margin:-380px 0 0 -380px;border-radius:50%;pointer-events:none;z-index:0;
+.spot{position:fixed;left:0;top:0;width:820px;height:820px;margin:-410px 0 0 -410px;border-radius:50%;pointer-events:none;z-index:0;
   background:radial-gradient(closest-side,rgba(255,122,60,.10),rgba(70,201,210,.05) 45%,transparent 72%);will-change:transform}
 @media (hover:none){.spot{display:none}}
 
@@ -49,8 +53,8 @@ a{color:inherit}
   cursor:pointer;box-shadow:2px 2px 0 var(--orange);white-space:nowrap}
 .pill[aria-pressed="true"]{background:var(--orange);color:#0b0d12}
 .pill:focus-visible{outline:2.5px solid var(--teal);outline-offset:2px}
-.bubble{position:absolute;right:72%;bottom:62%;width:max-content;max-width:250px;background:var(--paper2);border:1.5px solid var(--ink);border-radius:18px 18px 4px 18px;
-  padding:10px 13px;font-family:var(--mono);font-size:12.5px;line-height:1.45;color:var(--ink);box-shadow:4px 4px 0 var(--orange);
+.bubble{position:absolute;right:72%;bottom:62%;width:max-content;max-width:260px;background:var(--paper2);border:1.5px solid var(--ink);border-radius:18px 18px 4px 18px;
+  padding:10px 13px;font-family:var(--mono);font-size:12.5px;line-height:1.5;color:var(--ink);box-shadow:4px 4px 0 var(--orange);
   transform-origin:100% 100%;transform:scale(.5) rotate(4deg);opacity:0;transition:transform .35s cubic-bezier(.3,1.6,.5,1),opacity .2s;pointer-events:none}
 .bubble.show{transform:scale(1) rotate(1.5deg);opacity:1}
 .bubble.mad{border-color:#ff6a5a;box-shadow:4px 4px 0 #ff6a5a}
@@ -61,15 +65,15 @@ a{color:inherit}
 
 /* ---------- chat with Bolt ---------- */
 .chat{position:fixed;z-index:25;right:max(12px,env(safe-area-inset-right,0px));bottom:calc(228px + env(safe-area-inset-bottom,0px));
-  width:min(350px,calc(100vw - 24px));max-height:min(62vh,480px);display:flex;flex-direction:column;background:var(--paper);
+  width:min(360px,calc(100vw - 24px));max-height:min(62vh,500px);display:flex;flex-direction:column;background:var(--paper);
   border:1.5px solid var(--ink);border-radius:18px;box-shadow:5px 5px 0 var(--orange);overflow:hidden;transform-origin:100% 100%;animation:chatIn .35s cubic-bezier(.3,1.5,.5,1)}
 @keyframes chatIn{from{transform:scale(.6) rotate(3deg);opacity:0}}
 .chat-head{display:grid;grid-template-columns:1fr auto;gap:0 10px;padding:12px 14px;border-bottom:1px solid var(--line);background:var(--paper2)}
-.chat-head b{font-family:var(--display);font-weight:500;font-size:17px}
+.chat-head b{font-weight:600;font-size:16px;letter-spacing:-.01em}
 .chat-head small{grid-column:1;font-family:var(--mono);font-size:10.5px;color:var(--muted)}
 .chat-head button{grid-row:1/3;grid-column:2;align-self:center;width:30px;height:30px;border-radius:50%;border:1.5px solid var(--ink);background:none;color:var(--ink);cursor:pointer;font-size:16px}
 .msgs{flex:1;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:8px;min-height:120px}
-.msg{max-width:86%;padding:8px 12px;border-radius:14px;font-size:14px;line-height:1.45;overflow-wrap:anywhere}
+.msg{max-width:86%;padding:8px 12px;border-radius:14px;font-size:14px;line-height:1.5;overflow-wrap:anywhere}
 .msg.bot{align-self:flex-start;background:var(--paper2);border:1px solid var(--line);border-bottom-left-radius:4px}
 .msg.bot b{color:var(--orange-t);font-weight:600}
 .msg.me{align-self:flex-end;background:var(--orange);color:#0b0d12;border-bottom-right-radius:4px}
@@ -78,144 +82,205 @@ a{color:inherit}
 .quick button{font-family:var(--mono);font-size:11.5px;padding:5px 10px;border-radius:999px;border:1px solid var(--line2);background:none;color:var(--soft);cursor:pointer}
 .quick button:hover,.quick button:focus-visible{border-color:var(--orange);color:var(--ink);outline:none}
 .chat-in{display:flex;gap:8px;padding:10px 12px;border-top:1px solid var(--line)}
-.chat-in input{flex:1;min-width:0;font:16px var(--body);color:var(--ink);background:var(--bg);border:1.5px solid var(--line2);border-radius:10px;padding:8px 11px}
+.chat-in input{flex:1;min-width:0;font:16px var(--sans);color:var(--ink);background:var(--bg);border:1.5px solid var(--line2);border-radius:10px;padding:8px 11px}
 .chat-in input:focus{outline:none;border-color:var(--orange)}
 .chat-in button{font-family:var(--mono);font-size:12px;border:1.5px solid var(--ink);border-radius:10px;background:var(--ink);color:#0b0d12;padding:0 13px;cursor:pointer}
 
-/* ---------- content ---------- */
-.content{max-width:780px;margin:0 auto;padding:28px max(24px,env(safe-area-inset-right,0px)) 18vh max(24px,env(safe-area-inset-left,0px));min-width:0}
-.top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:5vh}
-.logo{font-family:var(--display);font-weight:600;font-size:19px;letter-spacing:-.01em;text-decoration:none}
-.logo span{color:var(--orange)}
-.top nav{display:flex;gap:4px;flex-wrap:wrap}
-.top nav a{font-family:var(--mono);font-size:12px;text-decoration:none;padding:6px 10px;border-radius:999px;color:var(--muted);transition:background .2s,color .2s}
-.top nav a:hover,.top nav a:focus-visible{background:var(--ink);color:#0b0d12;outline:none}
-section{max-width:680px;padding-block:8vh}
-#hello{min-height:64vh;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding-top:0}
-.tag{font-family:var(--mono);font-size:12px;color:var(--muted);margin-bottom:12px}
-.tag b{color:var(--orange-t);font-weight:600}
-h1,h2,h3{font-family:var(--display);font-weight:500;letter-spacing:-.02em;margin:0;text-wrap:balance}
-h1{--lx:0;--ly:0;font-size:clamp(52px,9vw,112px);line-height:.95;transform-origin:0 50%;
-  transform:perspective(700px) rotateY(calc(var(--lx) * 9deg)) rotateX(calc(var(--ly) * -7deg));
-  text-shadow:calc(var(--lx) * -1px - 1px) calc(var(--ly) * -1px + 1px) 0 #4a5466,calc(var(--lx) * -2px - 2px) calc(var(--ly) * -2px + 2px) 0 #3c4555,
-    calc(var(--lx) * -3px - 3px) calc(var(--ly) * -3px + 3px) 0 #2f3744,calc(var(--lx) * -4px - 4px) calc(var(--ly) * -4px + 4px) 0 #242a35,
-    calc(var(--lx) * -6px - 6px) calc(var(--ly) * -6px + 8px) 22px rgba(255,122,60,.22)}
+/* ---------- type ---------- */
+h1,h2,h3{font-family:var(--sans);margin:0;text-wrap:balance}
+h1{font-family:var(--display);font-size:clamp(36px,4.4vw,64px);font-weight:700;line-height:1.05;letter-spacing:-.035em;white-space:nowrap;transform-origin:0 50%;
+  transform:perspective(800px) rotateY(calc(var(--lx) * 8deg)) rotateX(calc(var(--ly) * -6deg));
+  text-shadow:calc(var(--lx) * -1px - 1px) calc(var(--ly) * -1px + 1px) 0 #49536a,calc(var(--lx) * -2px - 2px) calc(var(--ly) * -2px + 2px) 0 #353e55,
+    calc(var(--lx) * -3px - 3px) calc(var(--ly) * -3px + 3px) 0 #262d3f,calc(var(--lx) * -5px - 5px) calc(var(--ly) * -5px + 7px) 20px rgba(255,122,60,.22)}
 h1 em{font-style:normal;color:var(--orange)}
-h2{font-size:clamp(30px,3.8vw,44px);line-height:1.08;margin-bottom:18px}
+h2{font-family:var(--display);font-size:clamp(28px,3vw,42px);font-weight:600;line-height:1.12;letter-spacing:-.03em}
+h2 .acc{font-family:var(--serif);font-style:italic;font-weight:400;font-size:1.1em;letter-spacing:0;line-height:.9}
+h2 .acc .w,h2 .acc{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;padding-right:.05em}
+h2 .acc .w:hover{color:transparent;filter:brightness(1.25)}
+h3{font-weight:600;letter-spacing:-.02em}
 p{margin:0 0 14px;max-width:62ch;color:var(--soft)}
 b{color:var(--ink);font-weight:600}
-.lede{font-size:19px;color:var(--soft);margin-top:20px}
-.status{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12px;background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:6px 12px;margin-top:8px;color:var(--soft)}
-.status i{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 0 0 rgba(61,220,132,.5);animation:ping 2s infinite}
+.tag{font-family:var(--mono);font-size:12px;color:var(--muted);letter-spacing:.02em;margin-bottom:14px;text-transform:lowercase}
+.tag b{color:var(--orange-t);font-weight:600}
+
+/* every word is its own little 3D object */
+.w{display:inline-block;transform-origin:50% 80%;transition:transform .3s cubic-bezier(.3,1.7,.5,1),color .2s}
+.w:hover{transform:translateY(-.12em) rotateX(22deg) scale(1.06);color:var(--orange-t)}
+.split.in .w{animation:wordIn .75s cubic-bezier(.2,.9,.3,1.25) backwards}
+@keyframes wordIn{from{opacity:0;transform:perspective(500px) translateY(.7em) rotateX(-88deg)}}
+
+/* ---------- header + hero ---------- */
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding-top:26px}
+.logo{font-family:var(--display);font-weight:700;font-size:18px;letter-spacing:-.03em;text-decoration:none}
+.logo span{color:var(--orange)}
+.top nav{display:flex;gap:4px;flex-wrap:wrap}
+.top nav a{font-family:var(--mono);font-size:12px;text-decoration:none;padding:7px 12px;border-radius:999px;color:var(--muted);transition:background .2s,color .2s}
+.top nav a:hover,.top nav a:focus-visible{background:var(--ink);color:#0b0d12;outline:none}
+section{padding-block:11vh}
+.hero{display:grid;grid-template-columns:minmax(0,1.12fr) minmax(0,.88fr);gap:56px;align-items:center;min-height:calc(100vh - 80px);padding-block:6vh 8vh}
+.ticker{font-family:var(--serif);font-style:italic;font-size:clamp(26px,2.6vw,36px);line-height:1.15;color:var(--soft);margin-top:14px;perspective:600px}
+.flip{display:inline-block;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;padding-right:.08em;transform-origin:50% 60%}
+.flip.out{transition:transform .26s ease-in,opacity .26s;transform:rotateX(90deg);opacity:0}
+.flip.in{animation:flipIn .5s cubic-bezier(.3,1.5,.5,1)}
+@keyframes flipIn{from{transform:rotateX(-90deg);opacity:0}}
+.lede{font-size:18px;line-height:1.6;color:var(--soft);margin:14px 0 0;max-width:38ch}
+.status{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12px;background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:6px 12px;margin-top:20px;color:var(--soft)}
+.status i{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 0 0 rgba(61,220,132,.5);animation:ping 2s infinite;flex:none}
 @keyframes ping{70%{box-shadow:0 0 0 8px rgba(61,220,132,0)}100%{box-shadow:0 0 0 0 rgba(61,220,132,0)}}
-.btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:26px}
-.btn{font-family:var(--body);font-weight:600;font-size:15px;padding:12px 20px;border-radius:12px;border:1.5px solid var(--ink);background:var(--paper);color:var(--ink);
+.btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:28px}
+.btn{font-family:var(--sans);font-weight:600;font-size:15px;letter-spacing:-.01em;padding:12px 20px;border-radius:12px;border:1.5px solid var(--ink);background:var(--paper);color:var(--ink);
   text-decoration:none;cursor:pointer;box-shadow:3px 3px 0 var(--orange);transition:transform .12s,box-shadow .12s}
 .btn:hover{transform:translate(-1px,-1px);box-shadow:4px 4px 0 var(--orange)}
 .btn:active{transform:translate(3px,3px);box-shadow:0 0 0 var(--orange)}
 .btn.solid{background:var(--ink);color:#0b0d12}
-.btn:focus-visible,summary:focus-visible,.row:focus-visible,.why-card:focus-visible{outline:2.5px solid var(--teal);outline-offset:3px}
-.note{font-size:14px;color:var(--muted);margin-top:22px}
+.btn:focus-visible,.row:focus-visible,.why-card:focus-visible,.card:focus-visible{outline:2.5px solid var(--teal);outline-offset:3px}
+.note{font-size:14px;color:var(--muted);margin-top:20px}
 
-/* every word is its own little 3D object */
-.w{display:inline-block;transform-origin:50% 80%;transition:transform .3s cubic-bezier(.3,1.7,.5,1),color .2s}
-.w:hover{transform:translateY(-.14em) rotateX(22deg) scale(1.07);color:var(--orange-t)}
-.split.in .w{animation:wordIn .75s cubic-bezier(.2,.9,.3,1.25) backwards}
-@keyframes wordIn{from{opacity:0;transform:perspective(500px) translateY(.7em) rotateX(-88deg)}}
+/* the 3D terminal */
+.rig3d{perspective:1300px}
+.term-stack{transform-style:preserve-3d;transform:rotateY(calc(-16deg + var(--lx,0) * 10deg)) rotateX(calc(7deg - var(--ly,0) * 8deg));transition:transform .15s linear}
+.term{background:#0f1424;border:1px solid var(--line2);border-radius:16px;overflow:hidden;
+  box-shadow:0 50px 90px -40px rgba(0,0,0,.95),-22px 22px 0 -8px rgba(255,122,60,.16),22px -18px 0 -10px rgba(70,201,210,.10)}
+.term-bar{display:flex;align-items:center;gap:7px;padding:11px 14px;border-bottom:1px solid var(--line);background:#141a2c}
+.term-bar i{width:11px;height:11px;border-radius:50%;background:#ff5f57}.term-bar i:nth-child(2){background:#febc2e}.term-bar i:nth-child(3){background:#28c840}
+.term-bar span{margin-left:8px;font-family:var(--mono);font-size:11.5px;color:var(--muted)}
+.term pre{margin:0;padding:18px 20px 22px;font:13.5px/1.75 var(--mono);color:var(--soft);min-height:262px;white-space:pre-wrap;overflow-wrap:anywhere}
+.term .pr{color:var(--orange-t)} .term .ok{color:var(--green)} .term .cm{color:var(--muted)}
+.term .cur{display:inline-block;width:8px;height:1.1em;background:var(--orange);vertical-align:-3px;animation:caret .9s steps(1) infinite}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:16px;transform:translateZ(60px);transform-style:preserve-3d}
+.stat{background:var(--paper);border:1px solid var(--line2);border-radius:14px;padding:14px 14px 12px;box-shadow:0 26px 40px -26px rgba(0,0,0,.9)}
+.stat b{display:block;font-family:var(--display);font-size:28px;line-height:1;font-weight:700;letter-spacing:-.03em}
+.stat span{display:block;font-family:var(--mono);font-size:11px;color:var(--muted);margin-top:6px}
+.stat:nth-child(1) b{color:var(--orange-t)} .stat:nth-child(2) b{color:var(--teal)} .stat:nth-child(3) b{color:var(--yellow)}
 
-.facts{display:grid;grid-template-columns:auto 1fr;gap:8px 22px;margin:22px 0 0;font-size:15px}
-.facts dt{font-family:var(--mono);font-size:12px;color:var(--muted);padding-top:2px}
+/* ---------- shared section layouts ---------- */
+.sec-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px 56px;align-items:end;margin-bottom:36px}
+.sec-head p{margin:0;max-width:46ch}
+.split2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:56px;align-items:start}
+.panel,.card,.row,.why-card{background:rgba(21,27,45,.80);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border:1px solid var(--line);border-radius:18px}
+.card,.row,.why-card{cursor:pointer}
+.card:hover,.row:hover,.why-card:hover{border-color:var(--line2);box-shadow:0 26px 44px -28px rgba(0,0,0,.95)}
+.panel{padding:26px 28px}
+
+.big{font-size:21px;line-height:1.5;color:var(--ink);max-width:40ch}
+.facts{display:grid;grid-template-columns:auto 1fr;gap:12px 22px;margin:0;font-size:15px}
+.facts dt{font-family:var(--mono);font-size:12px;color:var(--muted);padding-top:3px}
 .facts dd{margin:0;color:var(--ink)}
+.facts dd+dt,.facts dd+dt+dd{border-top:1px solid var(--line);padding-top:12px}
 
-.tools{border-top:1.5px solid var(--ink);background:rgba(13,16,23,.6);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
-.row{display:grid;grid-template-columns:150px 1fr;gap:6px 18px;padding:14px 6px;border-bottom:1px solid var(--line);cursor:pointer}
-.row:hover{background:rgba(255,255,255,.035)}
-.row h3{font-size:16px;font-weight:600;font-family:var(--body);letter-spacing:0}
-.row h3 small{display:block;font-family:var(--mono);font-size:11px;color:var(--muted);font-weight:500;margin-top:2px}
-.row p{margin:0;font-size:15px}
-.row p.basic{color:var(--muted)}
+.tools{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.row{padding:20px 22px;display:flex;flex-direction:column;gap:10px}
+.row h3{font-size:18px}
+.row h3 small{display:block;font-family:var(--mono);font-size:11px;color:var(--orange-t);font-weight:500;letter-spacing:0;margin-top:3px}
+.row.basic h3 small{color:var(--muted)}
+.row p{margin:0;font-size:14.5px;line-height:1.6}
+.row.basic{border-style:dashed}
 
-.card{background:rgba(19,24,33,.86);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border:1px solid var(--line);border-radius:16px;margin-bottom:12px}
-.card:hover{border-color:var(--line2);box-shadow:0 24px 40px -26px rgba(0,0,0,.9)}
-.card[open]{border-color:var(--ink)}
-summary{list-style:none;cursor:pointer;padding:18px 20px;display:grid;grid-template-columns:1fr auto;gap:2px 14px;align-items:start;border-radius:16px}
-summary::-webkit-details-marker{display:none}
-summary .plus{grid-row:1/3;grid-column:2;width:30px;height:30px;border-radius:50%;border:1.5px solid var(--ink);display:grid;place-items:center;
-  font-family:var(--mono);font-size:16px;transition:transform .35s cubic-bezier(.3,1.5,.5,1),background .2s}
-.card[open] .plus{transform:rotate(45deg);background:var(--orange);border-color:var(--orange);color:#0b0d12}
-summary h3{font-size:19px}
-summary .meta{font-family:var(--mono);font-size:12px;color:var(--muted)}
-.now{font-family:var(--mono);font-size:10.5px;background:rgba(61,220,132,.14);color:var(--green);padding:2px 7px;border-radius:6px;margin-left:6px;vertical-align:2px}
-.card .more{padding:0 20px 18px}
-.card ul{margin:0;padding-left:18px;font-size:15px;color:var(--soft)}
+.jobs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.card{padding:22px 24px}
+.job h3{font-size:21px}
+.meta{font-family:var(--mono);font-size:12px;color:var(--muted);margin-top:4px}
+.now{font-family:var(--mono);font-size:10.5px;background:rgba(61,220,132,.14);color:var(--green);padding:2px 7px;border-radius:6px;margin-left:8px;vertical-align:4px;letter-spacing:0}
+.card ul{margin:14px 0 0;padding-left:18px;font-size:14.5px;color:var(--soft);line-height:1.6}
 .card li{margin-top:6px}
-.stack{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
-.stack span{font-family:var(--mono);font-size:11.5px;border:1px solid var(--line2);border-radius:6px;padding:2px 7px;background:#1a202b;color:var(--soft)}
-code{font-family:var(--mono);font-size:13px;background:#1a202b;border:1px solid var(--line2);padding:0 5px;border-radius:5px;color:var(--ink)}
-.num{font-family:var(--mono);font-size:12px;color:var(--orange-t);font-weight:600}
+.job.current{border-color:rgba(61,220,132,.35)}
 
-.why{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-.why-card{background:rgba(19,24,33,.86);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border:1px solid var(--line);border-radius:16px;padding:18px 20px;cursor:pointer;min-width:0}
-.why-card:hover{border-color:var(--line2);box-shadow:0 24px 40px -26px rgba(0,0,0,.9)}
+.projects{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.proj{display:flex;flex-direction:column;gap:12px;min-height:360px;position:relative;overflow:hidden}
+.proj .n{position:absolute;right:18px;top:10px;font-family:var(--display);font-size:64px;font-weight:700;letter-spacing:-.06em;color:rgba(255,255,255,.05);line-height:1}
+.proj .kind{font-family:var(--mono);font-size:11.5px;color:var(--orange-t)}
+.proj:nth-child(2) .kind{color:var(--teal)} .proj:nth-child(3) .kind{color:var(--yellow)}
+.proj h3{font-size:23px;line-height:1.12;max-width:14ch}
+.proj p{margin:0;font-size:14.5px}
+.stack{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto}
+.stack span{font-family:var(--mono);font-size:11px;border:1px solid var(--line2);border-radius:6px;padding:2px 7px;background:#181e29;color:var(--soft)}
+code{font-family:var(--mono);font-size:12.5px;background:#181e29;border:1px solid var(--line2);padding:0 5px;border-radius:5px;color:var(--ink)}
+.demo-note{font-family:var(--mono);font-size:11px;color:var(--muted)}
+
+.why{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.why-card{padding:22px 24px}
 .why-card .k{font-family:var(--mono);font-size:12px;color:var(--orange-t);font-weight:600}
-.why-card h3{font-size:19px;margin:6px 0}
-.why-card p{margin:0;font-size:15px}
+.why-card h3{font-size:19px;margin:8px 0}
+.why-card p{margin:0;font-size:14.5px}
 
-.ring-wrap{--r:345px;--w:280px;perspective:1200px;height:260px;margin:26px 0 8px;display:grid;place-items:center;cursor:pointer;overflow:hidden;border-radius:18px}
-.ring{position:relative;width:var(--w);height:205px;transform-style:preserve-3d;transform:translateZ(calc(var(--r) * -1)) rotateX(-6deg) rotateY(var(--a,0deg));transition:transform 1s cubic-bezier(.3,1.25,.4,1)}
-.q{position:absolute;inset:0;margin:0;padding:20px 20px 16px;background:var(--paper2);border:1.5px solid var(--ink);border-radius:16px;box-shadow:5px 5px 0 var(--orange);
+.reviews-grid{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:40px;align-items:center}
+.ring-wrap{--r:345px;--w:280px;perspective:1200px;height:300px;display:grid;place-items:center;cursor:pointer;overflow:hidden;border-radius:18px}
+.ring{position:relative;width:var(--w);height:210px;transform-style:preserve-3d;transform:translateZ(calc(var(--r) * -1)) rotateX(-6deg) rotateY(var(--a,0deg));transition:transform 1s cubic-bezier(.3,1.25,.4,1)}
+.q{position:absolute;inset:0;margin:0;padding:22px 22px 16px;background:var(--paper2);border:1.5px solid var(--ink);border-radius:16px;box-shadow:5px 5px 0 var(--orange);
   display:flex;flex-direction:column;justify-content:space-between;backface-visibility:hidden;-webkit-backface-visibility:hidden;
   transform:rotateY(calc(var(--i) * 45deg)) translateZ(var(--r));transition:opacity .5s;opacity:.4}
 .q.joke{box-shadow:5px 5px 0 var(--teal)}
 .q.on{opacity:1}
-.q blockquote{margin:0;font-family:var(--display);font-size:19px;line-height:1.3;letter-spacing:-.01em;color:var(--ink)}
+.q blockquote{margin:0;font-family:var(--serif);font-style:italic;font-size:22px;line-height:1.25;font-weight:400;letter-spacing:-.005em;color:var(--ink)}
 .q figcaption{font-family:var(--mono);font-size:11.5px;color:var(--muted)}
 .q figcaption span{color:var(--orange)}
 .q.joke figcaption span{color:var(--teal)}
-.ring-ctrl{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
-#reviews{padding-bottom:14vh}
+.ring-ctrl{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}
+#reviews{overflow-x:clip}
 
-.school{display:flex;align-items:flex-end;gap:22px;flex-wrap:wrap;margin-bottom:18px}
-.gpa{font-family:var(--display);font-size:84px;line-height:.9;font-weight:500;letter-spacing:-.04em;color:var(--ink);text-shadow:-3px 3px 0 #2f3744,-6px 6px 0 #1f252f}
-.gpa small{display:block;font-family:var(--mono);font-size:12px;letter-spacing:.04em;color:var(--muted);margin-top:10px;text-shadow:none}
-.certs{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
-.certs li{padding:11px 0;border-bottom:1px solid var(--line);display:flex;gap:10px;color:var(--ink)}
-.certs li::before{content:"✓";color:var(--teal);font-weight:600}
+.gpa{font-family:var(--display);font-size:clamp(80px,8.5vw,124px);line-height:.9;font-weight:700;letter-spacing:-.04em;color:var(--ink);text-shadow:-4px 4px 0 #2d3444,-8px 8px 0 #1e242f,-12px 14px 30px rgba(255,122,60,.18)}
+.gpa small{display:block;font-family:var(--mono);font-size:12px;letter-spacing:.02em;color:var(--muted);margin-top:18px;text-shadow:none;font-weight:400}
+.degree h3{font-size:22px}
+.certs{list-style:none;margin:18px 0 0;padding:0;border-top:1px solid var(--line)}
+.certs li{padding:12px 0;border-bottom:1px solid var(--line);color:var(--ink)}
+.certs li::before{content:"✓";color:var(--teal);font-weight:700;margin-right:10px}
 
-.mail{font-family:var(--display);font-size:clamp(22px,3.2vw,34px);font-weight:500;letter-spacing:-.01em;overflow-wrap:anywhere;user-select:all}
-.contact-row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:10px 0 24px}
-.links{display:grid;grid-template-columns:auto 1fr;gap:8px 20px;font-size:15px}
-.links dt{font-family:var(--mono);font-size:12px;color:var(--muted);padding-top:2px}
+.contact-card{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,.7fr);gap:40px;align-items:end;padding:42px 44px}
+.mail{font-family:var(--display);font-size:clamp(20px,2.4vw,32px);font-weight:600;letter-spacing:-.02em;overflow-wrap:anywhere;user-select:all;margin-top:22px}
+.contact-row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:22px}
+.links{display:grid;grid-template-columns:auto 1fr;gap:12px 20px;font-size:15px;margin:0}
+.links dt{font-family:var(--mono);font-size:12px;color:var(--muted);padding-top:3px}
 .links dd{margin:0;color:var(--ink)}
-footer{font-family:var(--mono);font-size:12px;color:var(--muted);max-width:680px;border-top:1px solid var(--line);padding-top:16px;margin-top:6vh}
+footer{font-family:var(--mono);font-size:12px;color:var(--muted);padding-block:26px 120px}
 
 /* scroll-in 3D + mouse tilt + press */
 .d3{--in:0;transform-origin:50% 100%;transform:perspective(1000px) translateY(calc(var(--in) * 50px)) translateZ(calc(var(--in) * -110px)) rotateX(calc(var(--in) * 38deg + var(--rx,0deg))) rotateY(var(--ry,0deg));
-  opacity:calc(1 - var(--in) * .8);transition:transform .28s cubic-bezier(.2,.8,.2,1),opacity .28s,box-shadow .35s,border-color .2s,background .2s}
+  opacity:calc(1 - var(--in) * .8);transition:transform .28s cubic-bezier(.2,.8,.2,1),opacity .28s,box-shadow .35s,border-color .2s}
 h2.d3{transform-origin:0 100%}
 .pressed{animation:press .42s cubic-bezier(.3,1.4,.5,1)}
+/* gentle float: every card, tile and the terminal bob on their own rhythm */
+@keyframes floaty{0%,100%{translate:0 0}50%{translate:0 -7px}}
+.card,.row,.why-card,.stat,.panel,.rig3d,.ring-wrap{animation:floaty var(--fdur,6s) ease-in-out infinite;animation-delay:var(--fd,0s)}
+/* headings drift a touch with the mouse */
+main h2,.tag{translate:calc(var(--lx) * -9px) calc(var(--ly) * -5px);transition:translate .4s ease-out}
+/* gradient words shimmer */
+@keyframes shimmer{to{background-position:200% 50%}}
+h2 .acc,h2 .acc .w,.flip{background-size:200% 100%}
+h2 .acc,.flip.in,.flip:not(.out){animation:shimmer 6s linear infinite}
+h2.split.in .acc .w{animation:wordIn .75s cubic-bezier(.2,.9,.3,1.25) backwards,shimmer 6s linear infinite}
+.flip.in{animation:flipIn .5s cubic-bezier(.3,1.5,.5,1),shimmer 6s linear infinite}
+/* the name floats too */
+@keyframes nameFloat{0%,100%{translate:0 0}50%{translate:0 -5px}}
+h1{animation:nameFloat 7s ease-in-out infinite}
+.btn.solid{animation:glow 3.2s ease-in-out infinite}
+.card.pressed,.row.pressed,.why-card.pressed{animation:press .42s cubic-bezier(.3,1.4,.5,1)}
+@keyframes glow{50%{box-shadow:3px 3px 0 var(--orange),0 0 26px rgba(255,122,60,.35)}}
 @keyframes press{35%{transform:perspective(900px) translateZ(-46px) rotateX(5deg) scale(.985)}}
 
 .toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translate(-50%,30px);opacity:0;z-index:30;
   background:var(--ink);color:#0b0d12;font-family:var(--mono);font-size:12px;padding:9px 14px;border-radius:10px;transition:.3s;pointer-events:none}
 .toast.show{transform:translate(-50%,0);opacity:1}
 
+@media (max-width:1060px){.tools,.why,.projects{grid-template-columns:repeat(2,minmax(0,1fr))}.proj{min-height:300px}}
 @media (max-width:900px){
+  .wrap{padding-left:max(18px,env(safe-area-inset-left,0px));padding-right:max(18px,env(safe-area-inset-right,0px))}
+  .hero,.split2,.sec-head,.reviews-grid,.contact-card,.jobs{grid-template-columns:minmax(0,1fr)}
+  .hero{min-height:auto;gap:40px;padding-block:7vh 4vh}
+  .term-stack{transform:rotateY(-6deg) rotateX(4deg)}
+  .split2{gap:28px} .contact-card{padding:28px 24px;gap:26px}
+  section{padding-block:7vh}
   .stage{width:120px;height:142px;right:max(4px,env(safe-area-inset-right,0px))}
-  .pills{top:-6px}
-  .pill{font-size:9.5px;padding:3px 7px}
+  .pills{top:-6px} .pill{font-size:9.5px;padding:3px 7px}
   .bubble{font-size:11.5px;padding:8px 11px;max-width:min(240px,70vw);right:4px;bottom:calc(100% + 14px)}
   .chat{bottom:calc(172px + env(safe-area-inset-bottom,0px));max-height:min(56vh,430px)}
-  .content{padding:18px max(18px,env(safe-area-inset-right,0px)) 22vh max(18px,env(safe-area-inset-left,0px))}
-  section{padding-block:5vh}
-  .row{grid-template-columns:1fr}
 }
-@media (max-width:600px){.why{grid-template-columns:1fr}.ring-wrap{--r:280px;--w:230px;height:280px}.q blockquote{font-size:17px}}
+@media (max-width:640px){h1{white-space:normal}.top nav a{padding:6px 8px;font-size:11.5px}.top nav a[href="#reviews"]{display:none}.tools,.why,.projects{grid-template-columns:minmax(0,1fr)}.stat b{font-size:24px}.ring-wrap{--r:280px;--w:230px;height:290px}.q blockquote{font-size:17px}.term pre{font-size:12.5px;min-height:230px}}
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
-  .status i,.bubble::after,.split.in .w,.pressed,.chat{animation:none}
+  .status i,.bubble::after,.split.in .w,.pressed,.chat,.term .cur,.card,.row,.why-card,.stat,.panel,.rig3d,.ring-wrap,h1,h2 .acc,h2 .acc .w,.flip,.btn.solid{animation:none!important}
+  main h2,.tag{translate:none}
   .bubble,.ring,.w{transition:none}
-  .d3,h1{transform:none!important;opacity:1!important}
+  .d3,h1,.term-stack{transform:none!important;opacity:1!important}
 }
 </style>
 </head>
@@ -225,7 +290,7 @@ h2.d3{transform-origin:0 100%}
 <div class="app">
   <div class="stage" id="stage">
     <canvas id="bot" aria-label="Bolt, a small 3D robot. Tap to poke him, drag to spin him."></canvas>
-    <div class="pills"><button class="pill" id="chatBtn" aria-expanded="false" aria-controls="chat">chat</button><button class="pill" id="snd" aria-pressed="false" title="Bolt's beeps">sound off</button></div>
+    <div class="pills"><button class="pill" id="chatBtn" aria-expanded="false" aria-controls="chat">chat</button><button class="pill" id="snd" aria-pressed="true" title="Bolt's beeps">sound on</button></div>
     <div class="bubble" id="bubble" aria-live="polite"></div>
   </div>
 
@@ -237,36 +302,63 @@ h2.d3{transform-origin:0 100%}
   </div>
 
   <main class="content">
-    <div class="top">
+    <div class="wrap top">
       <a class="logo" href="#hello">yash<span>.</span>kolekar</a>
-      <nav aria-label="Sections"><a href="#work">work</a><a href="#projects">projects</a><a href="#reviews">jokes</a><a href="#contact">contact</a></nav>
+      <nav aria-label="Sections"><a href="#stack">toolbox</a><a href="#work">work</a><a href="#projects">projects</a><a href="#reviews">jokes</a><a href="#contact">contact</a></nav>
     </div>
 
-    <section id="hello" data-say="hi! I'm <b>Bolt</b>, Yash's sidekick. poke me, or hit <b>chat</b> and ask me stuff.">
-      <div class="tag"><b>AI/ML Engineer</b> · Data Scientist</div>
-      <h1>Yash Kolekar<em>.</em></h1>
-      <p class="lede">I build GenAI systems that answer from <b>your</b> data: RAG pipelines, agents that use real tools, and the FastAPI services that ship them.</p>
-      <span class="status"><i></i>immediate joiner · Pune, open to remote</span>
-      <div class="btns"><a class="btn solid" href="#projects" data-say="good choice. projects are my favourite part.">See projects</a><a class="btn" href="#contact" data-say="straight to the point. I like you.">Say hi</a><button class="btn" id="heroChat" data-say="">Chat with Bolt</button></div>
-      <p class="note">That's Bolt, down in the corner. Poke him, chat with him, just don't scroll too fast. He hates that.</p>
+    <section id="hello" class="wrap hero" data-say="hi! I'm <b>Bolt</b>, Yash's sidekick. poke me, or hit <b>chat</b> and ask me stuff.">
+      <div>
+        <div class="tag"><b>AI/ML Engineer</b> · Data Scientist · GenAI, RAG &amp; agents</div>
+        <h1>Yash Kolekar<em>.</em></h1>
+        <div class="ticker" aria-live="off">I build <span class="flip" id="flip">RAG pipelines</span></div>
+        <p class="lede">GenAI systems that answer from <b>your</b> data, not from guesswork: retrieval, agents that use real tools, and the FastAPI services that ship them.</p>
+        <span class="status"><i></i><span>immediate joiner · Pune, open to remote</span></span>
+        <div class="btns"><a class="btn solid" href="#projects" data-say="good choice. projects are my favourite part.">See projects</a><a class="btn" href="#contact" data-say="straight to the point. I like you.">Say hi</a><button class="btn" id="heroChat">Chat with Bolt</button></div>
+        <p class="note">That's Bolt in the corner. Poke him, chat with him, just don't scroll too fast. He hates that.</p>
+      </div>
+      <div class="rig3d" aria-label="Terminal: whoami and stack summary">
+        <div class="term-stack" id="termStack">
+          <div class="term">
+            <div class="term-bar"><i></i><i></i><i></i><span>yash@pune: ~</span></div>
+<pre id="term"><span class="pr">$</span> whoami
+yash kolekar · ai/ml engineer · data scientist
+<span class="pr">$</span> cat stack.txt
+python · langgraph · rag · fastapi · docker · aws
+<span class="pr">$</span> uptime
+2+ years shipping ML &amp; GenAI to production
+<span class="pr">$</span> ./hire --check
+<span class="ok">✓ immediate joiner · pune / remote</span></pre>
+          </div>
+          <div class="stats"><div class="stat"><b>2+</b><span>years in prod</span></div><div class="stat"><b>4</b><span>companies</span></div><div class="stat"><b>3</b><span>flagship projects</span></div></div>
+        </div>
+      </div>
     </section>
 
-    <section id="about" data-say="short version: Yash builds AI that answers from <b>real data</b>, not guesses.">
-      <div class="tag"><b>02</b> about</div>
-      <h2>From raw data to something people actually use.</h2>
-      <p>I'm a Data Scientist and AI Engineer with 2+ years building ML and Generative AI systems end to end. Most of my time goes into the unglamorous half of GenAI: how a document gets chunked, why retrieval returns the wrong passage, what a prompt should refuse to answer.</p>
-      <p>Alongside that sits classical ML (Scikit-learn, PyTorch, XGBoost) and the SQL and ETL that keep inputs honest. It all ships the same way: FastAPI, Docker, Jenkins CI/CD, PyTest and AWS.</p>
-      <dl class="facts">
-        <dt>now</dt><dd>Data Scientist at Infosys, Bengaluru</dd>
-        <dt>from</dt><dd>Pune, India</dd>
-        <dt>core</dt><dd>Python · FastAPI · LangGraph · RAG</dd>
-        <dt>school</dt><dd>B.Tech CSE, CGPA 9.02</dd>
-      </dl>
+    <section id="about" class="wrap" data-say="short version: Yash builds AI that answers from <b>real data</b>, not guesses.">
+      <div class="split2">
+        <div>
+          <div class="tag"><b>02</b> about</div>
+          <h2>From raw data to something people <em class="acc">actually use.</em></h2>
+        </div>
+        <div>
+          <p class="big">I'm a Data Scientist and AI Engineer with <b>2+ years</b> building ML and Generative AI systems end to end.</p>
+          <p>Most of my time goes into the unglamorous half of GenAI: how a document gets chunked, why retrieval returns the wrong passage, what a prompt should refuse to answer. Alongside that sits classical ML (Scikit-learn, PyTorch, XGBoost) and the SQL and ETL that keep inputs honest. It all ships the same way: FastAPI, Docker, Jenkins CI/CD, PyTest and AWS.</p>
+          <div class="panel" style="margin-top:22px">
+            <dl class="facts">
+              <dt>now</dt><dd>Data Scientist at Infosys, Bengaluru</dd>
+              <dt>from</dt><dd>Pune, India</dd>
+              <dt>core</dt><dd>Python · FastAPI · LangGraph · RAG</dd>
+              <dt>degree</dt><dd>B.Tech, Computer Science &amp; Engineering</dd>
+            </dl>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <section id="stack" data-say="his toolbox. I'm made of <b>Three.js</b>, in case you were wondering.">
-      <div class="tag"><b>03</b> toolbox</div>
-      <h2>What I actually reach for.</h2>
+    <section id="stack" class="wrap" data-say="his toolbox. I'm made of <b>Three.js</b>, in case you were wondering.">
+      <div class="sec-head"><div><div class="tag"><b>03</b> toolbox</div><h2>What I actually <em class="acc">reach for.</em></h2></div>
+        <p>Listed at the depth I'd defend in an interview. Anything I've only used now and then is marked as working knowledge.</p></div>
       <div class="tools">
         <div class="row" tabindex="0" data-say="LLM stuff. he tunes retrieval and prompts <b>before</b> reaching for a fine-tune."><h3>GenAI &amp; LLMs<small>core</small></h3><p>Prompt engineering, LLM app design, LoRA / PEFT, OpenAI, Claude, LLaMA, Mistral, Ollama</p></div>
         <div class="row" tabindex="0" data-say="agents! like me, but they call real tools instead of spinning around."><h3>Agents<small>core</small></h3><p>LangChain, LangGraph, CrewAI, function calling, agent loops, multi-turn memory</p></div>
@@ -274,100 +366,107 @@ h2.d3{transform-origin:0 100%}
         <div class="row" tabindex="0" data-say="the classical half. numbers that predict things."><h3>ML &amp; NLP<small>strong</small></h3><p>Scikit-learn, PyTorch, XGBoost, TensorFlow, Hugging Face Transformers, forecasting</p></div>
         <div class="row" tabindex="0" data-say="he actually looks at the data first. wild."><h3>Data science<small>strong</small></h3><p>EDA, feature engineering, model evaluation, statistical analysis, A/B-style experiments, SQL &amp; ETL</p></div>
         <div class="row" tabindex="0" data-say="prototype to production. containers all the way down."><h3>Backend &amp; cloud<small>core</small></h3><p>FastAPI, Docker, Jenkins CI/CD, PyTest, microservices, AWS</p></div>
-        <div class="row" tabindex="0" data-say="he marks these 'basic'. honest guy."><h3>Also used<small>working knowledge</small></h3><p class="basic">MLflow, Kubernetes, LlamaIndex, MCP, Flask, Node.js, React, Azure &amp; GCP</p></div>
+        <div class="row basic" tabindex="0" data-say="he marks these 'basic'. honest guy." style="grid-column:1/-1"><h3>Also used<small>working knowledge</small></h3><p>MLflow · Kubernetes · LlamaIndex · MCP · Flask · Node.js · React · Azure &amp; GCP</p></div>
       </div>
     </section>
 
-    <section id="work" data-say="4 roles, 2+ years. loading <b>career.exe</b>… done.">
-      <div class="tag"><b>04</b> work</div>
-      <h2>Four roles, one direction.</h2>
-      <details class="card" open data-say="Infosys. that's where he is <b>right now</b>.">
-        <summary><h3>Data Scientist<span class="now">NOW</span></h3><span class="meta">Infosys · Bengaluru · Sep 2026 – present</span><span class="plus">+</span></summary>
-        <div class="more"><ul><li>Building an enterprise AIOps assistant: an LLM chatbot over operations and infrastructure data.</li><li>Retrieval across enterprise docs: chunking, embeddings, semantic search, RAG.</li><li>ML/NLP components and evaluation with Python, pandas and Scikit-learn; REST APIs for the platform.</li></ul></div>
-      </details>
-      <details class="card" data-say="Webcrypt: RAG, agents and LoRA in six busy months.">
-        <summary><h3>AI Engineer</h3><span class="meta">Webcrypt Technology · Pune · Apr – Sep 2026 · contract</span><span class="plus">+</span></summary>
-        <div class="more"><ul><li>Shipped RAG systems, AI agents and LLM chatbots on LangChain, LangGraph and CrewAI.</li><li>Improved answer accuracy with retrieval tuning, prompt engineering and LoRA fine-tuning.</li><li>FastAPI services in Docker, deployed to AWS, with CI/CD and post-release monitoring.</li></ul></div>
-      </details>
-      <details class="card" data-say="HotelKey. he worked onsite with clients. brave.">
-        <summary><h3>ML Implementation Specialist</h3><span class="meta">HotelKey · Nagpur · Jan 2025 – Mar 2026</span><span class="plus">+</span></summary>
-        <div class="more"><ul><li>RAG chatbots and NLP apps with LangChain and Hugging Face Transformers.</li><li>FastAPI microservices serving ML models in production.</li><li>Jenkins + Docker pipelines, PyTest coverage, and a lot of SQL and ETL.</li><li>Onsite rollout and troubleshooting with client teams.</li></ul></div>
-      </details>
-      <details class="card" data-say="Starlite: where it all started. baby models.">
-        <summary><h3>Associate AI Engineer</h3><span class="meta">Starlite Infotech · Pune · Feb – Dec 2024</span><span class="plus">+</span></summary>
-        <div class="more"><ul><li>Baseline classification and regression models with Scikit-learn.</li><li>NLP prototypes: tokenisation, embeddings, early semantic search.</li><li>SQL extraction and ML scripts integrated with backend REST APIs.</li></ul></div>
-      </details>
+    <section id="work" class="wrap" data-say="4 roles, 2+ years. loading <b>career.exe</b>… done.">
+      <div class="sec-head"><div><div class="tag"><b>04</b> work</div><h2>Four roles, <em class="acc">one direction.</em></h2></div>
+        <p>Every role pushed the same skill further: getting ML and GenAI out of notebooks and into systems people use.</p></div>
+      <div class="jobs">
+        <div class="card job current" tabindex="0" data-say="Infosys. that's where he is <b>right now</b>."><h3>Data Scientist<span class="now">NOW</span></h3><div class="meta">Infosys · Bengaluru · Sep 2026 – present</div>
+          <ul><li>Building an enterprise AIOps assistant: an LLM chatbot over operations and infrastructure data.</li><li>Retrieval across enterprise docs: chunking, embeddings, semantic search, RAG.</li><li>ML/NLP components and evaluation with Python, pandas and Scikit-learn; REST APIs for the platform.</li></ul></div>
+        <div class="card job" tabindex="0" data-say="Webcrypt: RAG, agents and LoRA in six busy months."><h3>AI Engineer</h3><div class="meta">Webcrypt Technology · Pune · Apr – Sep 2026 · contract</div>
+          <ul><li>Shipped RAG systems, AI agents and LLM chatbots on LangChain, LangGraph and CrewAI.</li><li>Improved answer accuracy with retrieval tuning, prompt engineering and LoRA fine-tuning.</li><li>FastAPI services in Docker, deployed to AWS, with CI/CD and post-release monitoring.</li></ul></div>
+        <div class="card job" tabindex="0" data-say="HotelKey. he worked onsite with clients. brave."><h3>ML Implementation Specialist</h3><div class="meta">HotelKey · Nagpur · Jan 2025 – Mar 2026</div>
+          <ul><li>RAG chatbots and NLP apps with LangChain and Hugging Face Transformers.</li><li>FastAPI microservices serving ML models in production.</li><li>Jenkins + Docker pipelines, PyTest coverage, SQL and ETL; onsite rollout with client teams.</li></ul></div>
+        <div class="card job" tabindex="0" data-say="Starlite: where it all started. baby models."><h3>Associate AI Engineer</h3><div class="meta">Starlite Infotech · Pune · Feb – Dec 2024</div>
+          <ul><li>Baseline classification and regression models with Scikit-learn.</li><li>NLP prototypes: tokenisation, embeddings, early semantic search.</li><li>SQL extraction and ML scripts integrated with backend REST APIs.</li></ul></div>
+      </div>
     </section>
 
-    <section id="projects" data-say="three systems. open one and I'll tell you something about it.">
-      <div class="tag"><b>05</b> projects</div>
-      <h2>Three things I built, start to finish.</h2>
-      <details class="card" data-say="the RAG one reads whole document piles so <b>you</b> don't have to.">
-        <summary><h3><span class="num">01 </span>Enterprise RAG &amp; AI Agent Platform</h3><span class="meta">retrieval + agents</span><span class="plus">+</span></summary>
-        <div class="more"><p>Q&amp;A, semantic search and summaries over private knowledge bases, with an agent layer that plans multi-step work and calls tools instead of answering from memory. Chunking and context strategy are tuned per corpus; answers stream back through FastAPI on AWS.</p>
+    <section id="projects" class="wrap" data-say="three systems. tap one and I'll tell you something about it.">
+      <div class="sec-head"><div><div class="tag"><b>05</b> projects</div><h2>Three things I built, <em class="acc">start to finish.</em></h2></div>
+        <p>Retrieval, agents and classical ML, each one taken from data to a running service.</p></div>
+      <div class="projects">
+        <div class="card proj" tabindex="0" data-say="the RAG one reads whole document piles so <b>you</b> don't have to."><span class="n">01</span><div class="kind">retrieval + agents</div><h3>Enterprise RAG &amp; AI Agent Platform</h3>
+          <p>Q&amp;A, semantic search and summaries over private knowledge bases, with an agent layer that plans multi-step work and calls tools instead of answering from memory. Chunking and context are tuned per corpus; answers stream back through FastAPI on AWS.</p>
           <div class="stack"><span>LangChain</span><span>LangGraph</span><span>OpenAI</span><span>Pinecone</span><span>FastAPI</span><span>AWS</span></div></div>
-      </details>
-      <details class="card" data-say="this agent asks a <b>human</b> when it's unsure. very polite.">
-        <summary><h3><span class="num">02 </span>Student Enrollment Assistant</h3><span class="meta">agent · tool calling</span><span class="plus">+</span></summary>
-        <div class="more"><p>An admissions agent that answers through real tool calls: <code>get_program_info</code>, <code>check_application_status</code> and <code>get_deadlines</code>. Session memory carries the applicant ID across turns, and anything out of scope goes to a human counsellor.</p>
-          <p class="note" style="margin-top:0">Demo project: the tools run on mock data.</p>
+        <div class="card proj" tabindex="0" data-say="this agent asks a <b>human</b> when it's unsure. very polite."><span class="n">02</span><div class="kind">agent · tool calling</div><h3>Student Enrollment Assistant</h3>
+          <p>An admissions agent that answers through real tool calls: <code>get_program_info</code>, <code>check_application_status</code>, <code>get_deadlines</code>. Session memory carries the applicant ID; anything out of scope goes to a human counsellor.</p>
+          <div class="demo-note">demo project · tools run on mock data</div>
           <div class="stack"><span>Python</span><span>function calling</span><span>agent loop</span><span>memory</span></div></div>
-      </details>
-      <details class="card" data-say="QuantScan he built for himself. it ranks stocks, not robots. thankfully.">
-        <summary><h3><span class="num">03 </span>QuantScan PRO</h3><span class="meta">predictive analytics</span><span class="plus">+</span></summary>
-        <div class="more"><p>An end-to-end pipeline with a multi-filter scoring engine over market data: ingestion, cleaning and feature engineering feed the model, and results land in a React dashboard with daily reports.</p>
+        <div class="card proj" tabindex="0" data-say="QuantScan he built for himself. it ranks stocks, not robots. thankfully."><span class="n">03</span><div class="kind">predictive analytics</div><h3>QuantScan PRO</h3>
+          <p>An end-to-end pipeline with a multi-filter scoring engine over market data: ingestion, cleaning and feature engineering feed the model, and results land in a React dashboard with daily reports.</p>
           <div class="stack"><span>Python</span><span>Scikit-learn</span><span>FastAPI</span><span>MySQL</span><span>React</span><span>Docker</span></div></div>
-      </details>
+      </div>
     </section>
 
-    <section id="whyme" data-say="the pitch. I didn't write it, but I agree with all of it.">
-      <div class="tag"><b>06</b> why me</div>
-      <h2>Six reasons to reply to my email.</h2>
+    <section id="whyme" class="wrap" data-say="the pitch. I didn't write it, but I agree with all of it.">
+      <div class="sec-head"><div><div class="tag"><b>06</b> why me</div><h2>Six reasons to reply to <em class="acc">my email.</em></h2></div>
+        <p>No buzzwords, just what you get on day one.</p></div>
       <div class="why">
         <div class="why-card" tabindex="0" data-say="immediate joiner. no notice-period drama."><span class="k">01</span><h3>I can start now</h3><p>Immediate joiner, open to hybrid and remote roles.</p></div>
         <div class="why-card" tabindex="0" data-say="a notebook that works is the start, not the finish line."><span class="k">02</span><h3>Prototype to production</h3><p>I own the whole path: data prep, retrieval, evaluation, then FastAPI services on Docker and AWS.</p></div>
         <div class="why-card" tabindex="0" data-say="four teams, four codebases. he survived them all."><span class="k">03</span><h3>Shipped four times over</h3><p>2+ years across Infosys, Webcrypt, HotelKey and Starlite, building ML and GenAI that real users touch.</p></div>
         <div class="why-card" tabindex="0" data-say="he talks to clients. in person. with an actual face."><span class="k">04</span><h3>Good with clients</h3><p>Onsite rollouts, troubleshooting and solution design alongside client teams.</p></div>
-        <div class="why-card" tabindex="0" data-say="most 'the model is wrong' bugs are retrieval bugs. he checks there first."><span class="k">05</span><h3>Retrieval first, fine-tune later</h3><p>Chunking, embeddings and context get fixed before anyone reaches for a fine-tune.</p></div>
-        <div class="why-card" tabindex="0" data-say="9.02 and AWS certified. I'm certified too. certified adorable."><span class="k">06</span><h3>Strong fundamentals</h3><p>B.Tech CSE with a 9.02 CGPA, AWS Certified Cloud Practitioner, and PyTest for the parts that must not break.</p></div>
+        <div class="why-card" tabindex="0" data-say="most 'the model is wrong' bugs are retrieval bugs. he checks there first."><span class="k">05</span><h3>Retrieval first</h3><p>Chunking, embeddings and context get fixed before anyone reaches for a fine-tune.</p></div>
+        <div class="why-card" tabindex="0" data-say="AWS certified. I'm certified too. certified adorable."><span class="k">06</span><h3>Strong fundamentals</h3><p>B.Tech in Computer Science &amp; Engineering, AWS Certified Cloud Practitioner, and PyTest for the parts that must not break.</p></div>
       </div>
     </section>
 
-    <section id="reviews" data-say="my reviews of Yash, plus my bad tech jokes. I'm unpaid and <b>extremely</b> biased.">
-      <div class="tag"><b>07</b> reviews &amp; jokes</div>
-      <h2>Reviews and bad jokes from a very biased robot.</h2>
-      <p class="note" style="margin-top:0">Every quote below is by Bolt. Bolt is a robot. Bolt has never been wrong, according to Bolt.</p>
-      <div class="ring-wrap" id="ringWrap" aria-label="Quotes by Bolt. Tap for the next one.">
-        <div class="ring" id="ring">
-          <figure class="q on" style="--i:0"><blockquote>"He fixes retrieval before blaming the model. Rarer than a bug-free Friday deploy."</blockquote><figcaption>Bolt, on Yash <span>★★★★★</span></figcaption></figure>
-          <figure class="q joke" style="--i:1"><blockquote>"It works on my machine. So we shipped my machine. That's Docker."</blockquote><figcaption>Bolt, tech joke <span>&lt;/&gt;</span></figcaption></figure>
-          <figure class="q" style="--i:2"><blockquote>"His agents call real tools. I just call him boss."</blockquote><figcaption>Bolt, on Yash <span>★★★★★</span></figcaption></figure>
-          <figure class="q joke" style="--i:3"><blockquote>"Prompt engineering is saying 'please' to a GPU with extra steps."</blockquote><figcaption>Bolt, AI joke <span>&lt;/&gt;</span></figcaption></figure>
-          <figure class="q" style="--i:4"><blockquote>"CGPA 9.02. I asked about the other 0.98. He said: edge cases."</blockquote><figcaption>Bolt, did the maths <span>★★★★★</span></figcaption></figure>
-          <figure class="q joke" style="--i:5"><blockquote>"My model is 99% accurate. The dataset is 99% one class."</blockquote><figcaption>Bolt, ML joke <span>&lt;/&gt;</span></figcaption></figure>
-          <figure class="q" style="--i:6"><blockquote>"Hire him before his RAG pipeline retrieves a better offer."</blockquote><figcaption>Bolt, worried <span>★★★★★</span></figcaption></figure>
-          <figure class="q joke" style="--i:7"><blockquote>"Overfitting: memorising the exam, then failing the interview."</blockquote><figcaption>Bolt, ML joke <span>&lt;/&gt;</span></figcaption></figure>
+    <section id="reviews" class="wrap" data-say="my reviews of Yash, plus my bad tech jokes. I'm unpaid and <b>extremely</b> biased.">
+      <div class="reviews-grid">
+        <div>
+          <div class="tag"><b>07</b> reviews &amp; jokes</div>
+          <h2>Reviews and bad jokes from a <em class="acc">very biased robot.</em></h2>
+          <p class="note">Every quote here is by Bolt. Bolt is a robot. Bolt has never been wrong, according to Bolt.</p>
+          <div class="ring-ctrl"><button class="btn" id="prevQ" aria-label="Previous quote">←</button><button class="btn solid" id="nextQ">Next →</button><button class="btn" id="jokeBtn">Tell me a tech joke</button></div>
+        </div>
+        <div class="ring-wrap" id="ringWrap" aria-label="Quotes by Bolt. Tap for the next one.">
+          <div class="ring" id="ring">
+            <figure class="q on" style="--i:0"><blockquote>"He fixes retrieval before blaming the model. Rarer than a bug-free Friday deploy."</blockquote><figcaption>Bolt, on Yash <span>★★★★★</span></figcaption></figure>
+            <figure class="q joke" style="--i:1"><blockquote>"It works on my machine. So we shipped my machine. That's Docker."</blockquote><figcaption>Bolt, tech joke <span>&lt;/&gt;</span></figcaption></figure>
+            <figure class="q" style="--i:2"><blockquote>"His agents call real tools. I just call him boss."</blockquote><figcaption>Bolt, on Yash <span>★★★★★</span></figcaption></figure>
+            <figure class="q joke" style="--i:3"><blockquote>"Prompt engineering is saying 'please' to a GPU with extra steps."</blockquote><figcaption>Bolt, AI joke <span>&lt;/&gt;</span></figcaption></figure>
+            <figure class="q" style="--i:4"><blockquote>"He writes PyTest for the parts that must not break. I'm one of those parts."</blockquote><figcaption>Bolt, fully tested <span>★★★★★</span></figcaption></figure>
+            <figure class="q joke" style="--i:5"><blockquote>"My model is 99% accurate. The dataset is 99% one class."</blockquote><figcaption>Bolt, ML joke <span>&lt;/&gt;</span></figcaption></figure>
+            <figure class="q" style="--i:6"><blockquote>"Hire him before his RAG pipeline retrieves a better offer."</blockquote><figcaption>Bolt, worried <span>★★★★★</span></figcaption></figure>
+            <figure class="q joke" style="--i:7"><blockquote>"Overfitting: memorising the exam, then failing the interview."</blockquote><figcaption>Bolt, ML joke <span>&lt;/&gt;</span></figcaption></figure>
+          </div>
         </div>
       </div>
-      <div class="ring-ctrl"><button class="btn" id="prevQ" aria-label="Previous quote">←</button><button class="btn solid" id="nextQ">Next →</button><button class="btn" id="jokeBtn">Tell me a tech joke</button></div>
     </section>
 
-    <section id="school" data-say="B.Tech, CGPA <b>9.02</b>. I checked twice.">
-      <div class="tag"><b>08</b> school</div>
-      <h2>Degree and certificates.</h2>
-      <div class="school"><div class="gpa">9.02<small>CGPA · out of 10</small></div><div><b>B.Tech, Computer Science Engineering</b><br><span style="color:var(--muted)">Solapur University · 2020 – 2024</span></div></div>
-      <ul class="certs"><li>AWS Certified Cloud Practitioner (CLF-C02)</li><li>Generative AI with LangChain &amp; HuggingFace</li><li>Machine Learning Specialization, Coursera</li></ul>
+    <section id="school" class="wrap" data-say="B.Tech in <b>Computer Science</b>, plus certificates. I checked twice.">
+      <div class="split2" style="align-items:center">
+        <div>
+          <div class="tag"><b>08</b> school</div>
+          <div class="gpa">B.Tech<small>Computer Science &amp; Engineering</small></div>
+        </div>
+        <div class="degree">
+          <h2 style="margin-bottom:10px">Degree and <em class="acc">certificates.</em></h2>
+          <h3>B.Tech in Computer Science &amp; Engineering</h3>
+          <ul class="certs"><li>AWS Certified Cloud Practitioner (CLF-C02)</li><li>Generative AI with LangChain &amp; HuggingFace</li><li>Machine Learning Specialization, Coursera</li></ul>
+        </div>
+      </div>
     </section>
 
-    <section id="contact" data-say="go on, say hi. I'll hold the <b>envelope</b>.">
-      <div class="tag"><b>09</b> contact</div>
-      <h2>Stuck on a RAG or ML problem? Let's talk.</h2>
-      <div class="mail" id="email">yash.kolekar1010@gmail.com</div>
-      <div class="contact-row"><button class="btn solid" id="copy" data-say="copied! I'd have written it down for you, but no fingers.">Copy email</button><button class="btn" id="copyPhone" data-say="phone number copied. he picks up. mostly.">Copy phone</button></div>
-      <dl class="links">
-        <dt>phone</dt><dd id="phone">+91 88831 60707</dd>
-        <dt>based</dt><dd>Pune, India · open to remote</dd>
-      </dl>
+    <section id="contact" class="wrap" data-say="go on, say hi. I'll hold the <b>envelope</b>.">
+      <div class="panel contact-card">
+        <div>
+          <div class="tag"><b>09</b> contact</div>
+          <h2>Stuck on a RAG or ML problem? <em class="acc">Let's talk.</em></h2>
+          <div class="mail" id="email">yash.kolekar1010@gmail.com</div>
+          <div class="contact-row"><button class="btn solid" id="copy" data-say="copied! I'd have written it down for you, but no fingers.">Copy email</button><button class="btn" id="copyPhone" data-say="phone number copied. he picks up. mostly.">Copy phone</button></div>
+        </div>
+        <dl class="links">
+          <dt>phone</dt><dd id="phone">+91 88831 60707</dd>
+          <dt>based</dt><dd>Pune, India</dd>
+          <dt>open to</dt><dd>hybrid · remote</dd>
+          <dt>joining</dt><dd>immediately</dd>
+        </dl>
+      </div>
       <footer>Designed and coded by me. Bolt is made of spheres, boxes and a lot of trial and error.</footer>
     </section>
   </main>
@@ -426,8 +525,8 @@ const M = { orange: mat(0xff6b2c, { roughness: .4 }), shell: mat(0xf3f1ec, { rou
   yellow: mat(0xffc93c, { emissive: 0xffb000, emissiveIntensity: .35 }) };
 
 /* ============================ sound (Web Audio beeps, off by default) ============================ */
-let actx = null, soundOn = false;
-try { soundOn = localStorage.getItem('bolt-sound') === 'on'; } catch (e) {}
+let actx = null, soundOn = true, unlocked = false;
+try { soundOn = localStorage.getItem('bolt-sound') !== 'off'; } catch (e) {}
 function tone(freqs, dur = .08, type = 'triangle', vol = .06) {
   if (!soundOn) return;
   try { actx = actx || new (window.AudioContext || window.webkitAudioContext)(); if (actx.state === 'suspended') actx.resume();
@@ -442,6 +541,10 @@ const SFX = { hello: () => tone([440, 660, 880, 1175], .08, 'triangle', .06), po
   blip: () => tone([520, 780], .07, 'sine', .05), pop: () => tone([320, 190], .05, 'triangle', .06),
   talk: () => tone([620 + Math.random() * 380], .035, 'square', .012), angry: () => tone([200, 160, 130], .1, 'sawtooth', .035),
   send: () => tone([880, 1320], .05, 'sine', .04) };
+// sound is ON by default. Browsers block audio until the visitor interacts once, so the first tap/click/key unlocks it (with a hello chirp).
+function unlockAudio() { if (unlocked || !soundOn) return;
+  try { actx = actx || new (window.AudioContext || window.webkitAudioContext)(); actx.resume().then(() => { if (!unlocked) { unlocked = true; SFX.hello(); } }); } catch (e) {} }
+['pointerdown', 'keydown', 'touchend'].forEach(ev => addEventListener(ev, unlockAudio, { passive: true }));
 
 /* ============================ Bolt: renderer + model ============================ */
 const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
@@ -541,7 +644,7 @@ function drawFace(mode, t) {
       fc.lineWidth = 8; fc.beginPath(); for (let x = -44; x <= 44; x += 4) { const y = ey + 76 + Math.sin(x * .15 + t * 10) * 6; x === -44 ? fc.moveTo(ex + x, y) : fc.lineTo(ex + x, y); } fc.stroke(); break; }
     case 'sleepy': { fc.lineWidth = 12; [L, R].forEach(x => { fc.beginPath(); fc.arc(x, ey - 8, 30, PI * .15, PI * .85); fc.stroke(); });
       fc.lineWidth = 7; fc.beginPath(); fc.arc(ex, ey + 66, 11, 0, 6.29); fc.stroke();
-      fc.font = '600 46px "JetBrains Mono", monospace'; for (let i = 0; i < 3; i++) { const p = (t * .45 + i / 3) % 1; fc.globalAlpha = 1 - p; fc.fillText('z', FW - 120 + p * 50, FH / 2 - 10 - p * 120); } fc.globalAlpha = 1; break; }
+      fc.font = '600 46px "Geist Mono", monospace'; for (let i = 0; i < 3; i++) { const p = (t * .45 + i / 3) % 1; fc.globalAlpha = 1 - p; fc.fillText('z', FW - 120 + p * 50, FH / 2 - 10 - p * 120); } fc.globalAlpha = 1; break; }
     case 'think': { const ox = 26, oy = -22; [L, R].forEach(x => { rr(x + ox - 27, ey + oy - 34, 54, 68, 27); fc.fill(); });
       fc.lineWidth = 8; fc.beginPath(); fc.moveTo(ex - 24, ey + 64); fc.lineTo(ex + 22, ey + 58); fc.stroke();
       for (let i = 0; i < 3; i++) { fc.globalAlpha = (Math.sin(t * 7 - i * 1.2) + 1) / 2 * .8 + .2; fc.beginPath(); fc.arc(ex + 92 + i * 26, ey + 88, 8, 0, 6.29); fc.fill(); } fc.globalAlpha = 1; break; }
@@ -555,9 +658,9 @@ function drawFace(mode, t) {
       fc.moveTo(L - 46, ey - 30); fc.lineTo(L + 30, ey - 54); fc.moveTo(R + 46, ey - 30); fc.lineTo(R - 30, ey - 54); fc.stroke();
       mouth(26, PI * 1.15, PI * 1.85, 9, 100);
       fc.save(); fc.fillStyle = '#7fb7ff'; fc.shadowColor = '#7fb7ff'; const ty = ey + 42 + ((t * 1.2) % 1) * 90; fc.beginPath(); fc.ellipse(L - 22, ty, 9, 13, 0, 0, 6.29); fc.fill(); fc.restore(); break; }
-    case 'code': fc.font = '600 120px "JetBrains Mono", monospace'; fc.fillText('</>', FW / 2, FH / 2 + 4); break;
-    case 'grad': fc.font = '600 122px "JetBrains Mono", monospace'; fc.fillText('9.02', FW / 2, FH / 2 + 4); break;
-    case 'load': { fc.font = '600 50px "JetBrains Mono", monospace'; fc.fillText('2+ YRS', FW / 2, FH / 2 - 34);
+    case 'code': fc.font = '600 120px "Geist Mono", monospace'; fc.fillText('</>', FW / 2, FH / 2 + 4); break;
+    case 'grad': fc.font = '600 104px "Geist Mono", monospace'; fc.fillText('B.TECH', FW / 2, FH / 2 + 4); break;
+    case 'load': { fc.font = '600 50px "Geist Mono", monospace'; fc.fillText('2+ YRS', FW / 2, FH / 2 - 34);
       fc.lineWidth = 6; rr(96, FH / 2 + 10, 320, 42, 21); fc.stroke(); const p = (t * .45) % 1; rr(105, FH / 2 + 19, Math.max(24, 302 * p), 24, 12); fc.fill(); break; }
     case 'chart': { fc.lineWidth = 11; const n = CHART.length - 1, p = Math.min((t * .55) % 1.4, 1) * n; fc.beginPath();
       for (let i = 0; i <= p; i++) { const x = 78 + i * 356 / n, y = 64 + CHART[i] * 210; i ? fc.lineTo(x, y) : fc.moveTo(x, y); } fc.stroke(); break; }
@@ -744,10 +847,10 @@ const so = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting
 sections.forEach(s => so.observe(s));
 document.querySelectorAll('a[href^="#"]').forEach(a => a.addEventListener('click', () => { ignoreScrollUntil = performance.now() + 1600; }));
 
-document.querySelectorAll('.row[data-say], a.btn[data-say], #copy, #copyPhone, .why-card[data-say]').forEach(el => {
+document.querySelectorAll('.row[data-say], .card[data-say], a.btn[data-say], #copy, #copyPhone, .why-card[data-say]').forEach(el => {
   const go = () => { if (!el.dataset.say) return; say(el.dataset.say); hop(); happyUntil = now() + 1; };
   el.addEventListener('click', go);
-  if (el.matches('.row, .why-card')) el.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); } });
+  if (el.matches('.row, .why-card, .card')) el.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); } });
 });
 document.querySelectorAll('details[data-say]').forEach(d => d.addEventListener('toggle', () => { if (d.open && !d.dataset.boot) { say(d.dataset.say); hop(); } delete d.dataset.boot; }));
 document.querySelectorAll('details[open]').forEach(d => d.dataset.boot = 1);
@@ -766,7 +869,7 @@ function answer(q) {
   if (has('rag', 'retriev', 'chunk', 'embedding', 'vector', 'pinecone', 'faiss')) return "his rule: fix chunking, embeddings and context <b>before</b> reaching for a fine-tune. most 'the model is wrong' bugs are retrieval bugs.";
   if (has('agent', 'langgraph', 'crewai', 'tool call', 'function call')) return "he builds agents on LangGraph and CrewAI that call real tools, keep memory across turns, and hand off to a human when unsure.";
   if (has('experience', 'work', 'job', 'compan', 'infosys', 'webcrypt', 'hotelkey', 'starlite', 'years', 'career', 'role')) return "<b>2+ years</b>, 4 roles: Data Scientist at <b>Infosys</b> (now), AI Engineer at Webcrypt, ML Implementation Specialist at HotelKey, Associate AI Engineer at Starlite.";
-  if (has('cgpa', 'gpa', 'degree', 'college', 'universit', 'education', 'stud', 'certif', 'b.tech', 'btech')) return "B.Tech in Computer Science from Solapur University, <b>CGPA 9.02</b>. plus AWS Cloud Practitioner, GenAI with LangChain & HuggingFace, and the Coursera ML Specialization.";
+  if (has('cgpa', 'gpa', 'degree', 'college', 'universit', 'education', 'stud', 'certif', 'b.tech', 'btech')) return "<b>B.Tech in Computer Science &amp; Engineering</b>, plus AWS Cloud Practitioner, GenAI with LangChain & HuggingFace, and the Coursera ML Specialization.";
   if (has('skill', 'stack', 'tech', 'tool', 'python', 'language', 'framework', 'know', 'ml', 'ai')) return "core: <b>Python, LangChain, LangGraph, CrewAI, RAG, FastAPI, Docker, AWS</b>. strong: Scikit-learn, PyTorch, XGBoost, SQL/ETL, EDA. he marks the rest 'basic'. honest guy.";
   if (has('where', 'location', 'pune', 'bengaluru', 'bangalore', 'remote', 'relocat', 'city')) return "based in <b>Pune</b>, working in Bengaluru right now, and open to hybrid or remote.";
   if (has('thank', 'thx', 'great', 'nice', 'awesome', 'love')) return "anytime. beep boop. &lt;3";
@@ -796,9 +899,9 @@ $('#quick').addEventListener('click', e => { if (e.target.tagName === 'BUTTON') 
 const bgCanvas = document.createElement('canvas'); bgCanvas.id = 'bg'; bgCanvas.setAttribute('aria-hidden', 'true'); document.body.prepend(bgCanvas);
 const bgR = new THREE.WebGLRenderer({ canvas: bgCanvas, antialias: true, alpha: true });
 bgR.setPixelRatio(Math.min(devicePixelRatio, small ? 1.25 : 1.5)); bgR.outputEncoding = THREE.sRGBEncoding; bgR.toneMapping = THREE.ACESFilmicToneMapping;
-const bgS = new THREE.Scene(); bgS.fog = new THREE.Fog(lin(0x090b10), 9, 22);
+const bgS = new THREE.Scene(); bgS.fog = new THREE.Fog(lin(0x1c2246), 9, 26);   // far bots melt into the night so text always wins
 const bgCam = new THREE.PerspectiveCamera(40, 1, .1, 80); bgCam.position.z = 10;
-bgS.add(new THREE.HemisphereLight(0xffffff, 0x303848, .9));
+bgS.add(new THREE.HemisphereLight(0xffffff, 0x4a5580, 1.1));
 const bgKey = new THREE.DirectionalLight(0xfff0e0, 1); bgKey.position.set(3, 5, 4); bgS.add(bgKey);
 const bgRim = new THREE.DirectionalLight(0x46c9d2, .6); bgRim.position.set(-4, -2, 2); bgS.add(bgRim);
 function miniFace(happy) { const c = document.createElement('canvas'); c.width = 256; c.height = 160; const g = c.getContext('2d');
@@ -811,13 +914,13 @@ const MG = { head: roundedBox(.9, .66, .62, .18, 5), body: roundedBox(.5, .38, .
   stick: new THREE.CylinderGeometry(.02, .02, .2, 6), blade: new THREE.BoxGeometry(.72, .022, .08), hub: new THREE.SphereGeometry(.055, 10, 8) };
 const botMats = [M.orange, mat(0x29b4bf), mat(0xffc93c), mat(0x8f7cf6)];
 const bots = [];
-for (let i = 0, n = small ? 6 : 14; i < n; i++) {
+for (let i = 0, n = small ? 6 : 11; i < n; i++) {
   const g = new THREE.Group(), m = botMats[i % 4];
   g.add(mesh(MG.head, M.shell, 0, .2, 0)); const scr = new THREE.Mesh(MG.screen, faceN); scr.position.set(0, .2, .316); g.add(scr);
   g.add(mesh(MG.body, m, 0, -.34, 0)); g.add(mesh(MG.stick, M.dark, 0, .62, 0));
   const prop = new THREE.Group(); prop.position.y = .73; prop.add(mesh(MG.blade, m)); const b2 = mesh(MG.blade, m); b2.rotation.y = PI / 2; prop.add(b2); prop.add(mesh(MG.hub, M.dark)); g.add(prop);
   bgS.add(g);
-  bots.push({ g, scr, prop, z: small ? -5 - Math.random() * 4.5 : -2.2 - Math.random() * 7, u: small ? Math.random() * 2 - 1 : (i % 2 ? 1 : -1) * (.64 + Math.random() * .3),
+  bots.push({ g, scr, prop, z: small ? -5 - Math.random() * 4.5 : -6 - Math.random() * 5, u: small ? Math.random() * 2 - 1 : (i % 2 ? 1 : -1) * (.5 + Math.random() * .47),
     v: Math.random(), ph: Math.random() * 6.28, par: .15 + Math.random() * .35, off: new THREE.Vector3(), vel: new THREE.Vector3(), flipAt: -9, happyUntil: 0, nextBlink: Math.random() * 4 });
   g.scale.setScalar(.5 + Math.random() * .35);
 }
@@ -825,18 +928,48 @@ for (let i = 0, n = small ? 6 : 14; i < n; i++) {
 const DUST = small ? 260 : 600, dustPos = new Float32Array(DUST * 3);
 for (let i = 0; i < DUST; i++) dustPos.set([(Math.random() - .5) * 36, (Math.random() - .5) * 90, -2 - Math.random() * 16], i * 3);
 const dustGeo = new THREE.BufferGeometry(); dustGeo.setAttribute('position', new THREE.BufferAttribute(dustPos, 3));
-const dust = new THREE.Points(dustGeo, new THREE.PointsMaterial({ size: .09, map: spriteTex([[0, 'rgba(255,255,255,1)'], [1, 'rgba(255,255,255,0)']]), transparent: true, opacity: .55, depthWrite: false, color: lin(0x9fb0c8) }));
+const dust = new THREE.Points(dustGeo, new THREE.PointsMaterial({ size: .09, map: spriteTex([[0, 'rgba(255,255,255,1)'], [1, 'rgba(255,255,255,0)']]), transparent: true, opacity: .75, depthWrite: false, color: lin(0xb8c6e0) }));
 bgS.add(dust);
 // faint wireframes far behind
 const wires = [[new THREE.IcosahedronGeometry(1.3, 1), 0x46c9d2, -.85, .3, -8], [new THREE.TorusKnotGeometry(.85, .26, 90, 10), 0xff7a3c, .88, -.4, -9],
   [new THREE.OctahedronGeometry(1.1, 0), 0xa493ff, -.75, -.9, -7], [new THREE.TorusGeometry(1, .32, 10, 32), 0xffcf4a, .8, .95, -10]]
   .map(([geo, c, u, v, z]) => { const o = new THREE.Mesh(geo, new THREE.MeshBasicMaterial({ color: lin(c), wireframe: true, transparent: true, opacity: .22 })); bgS.add(o); return { o, u, v, z }; });
 // gears
-function gear(r) { const g = new THREE.Group(), m = mat(0x1d232d, { roughness: .8, metalness: .2 });
-  g.add(mesh(new THREE.CylinderGeometry(r, r, .22, 32), m)); g.add(mesh(new THREE.CylinderGeometry(r * .35, r * .35, .3, 20), mat(0x272e3a)));
+function gear(r) { const g = new THREE.Group(), m = mat(0x46527a, { roughness: .6, metalness: .2 });
+  g.add(mesh(new THREE.CylinderGeometry(r, r, .22, 32), m)); g.add(mesh(new THREE.CylinderGeometry(r * .35, r * .35, .3, 20), mat(0x56638f)));
   for (let i = 0; i < 12; i++) { const tooth = mesh(new THREE.BoxGeometry(.22 * r, .22, .3 * r), m), a = i / 12 * 6.283; tooth.position.set(Math.cos(a) * r * 1.07, 0, Math.sin(a) * r * 1.07); tooth.rotation.y = -a; g.add(tooth); }
   g.rotation.x = PI / 2; const w = new THREE.Group(); w.add(g); bgS.add(w); return w; }
 const gears = [[-.85, .6, -8, .9, 1], [.92, -.45, -9, 1.2, -1], [.4, 1.05, -10, .7, 1]].map(([u, v, z, r, dir]) => ({ w: gear(r), u, v, z, dir }));
+// glowing 3D particle wave across the bottom of the night (ripples from every click)
+const WX = small ? 72 : 130, WZ = small ? 34 : 54, WN = WX * WZ;
+const wavePos = new Float32Array(WN * 3), waveCol = new Float32Array(WN * 3), waveXZ = new Float32Array(WN * 2);
+const wc = [new THREE.Color(0x46c9d2), new THREE.Color(0xa493ff), new THREE.Color(0xff7a3c)], tc = new THREE.Color();
+for (let i = 0; i < WN; i++) {
+  const ix = i % WX, iz = Math.floor(i / WX), u = ix / (WX - 1), x = (u - .5) * 46, z = -3 - iz / (WZ - 1) * 30;
+  waveXZ[i * 2] = x; waveXZ[i * 2 + 1] = z;
+  if (u < .5) tc.copy(wc[0]).lerp(wc[1], u * 2); else tc.copy(wc[1]).lerp(wc[2], (u - .5) * 2);
+  tc.multiplyScalar(1 - iz / WZ * .78);                                   // fade with depth (fog is off for this layer)
+  waveCol.set([tc.r, tc.g, tc.b], i * 3);
+}
+const waveGeo = new THREE.BufferGeometry();
+waveGeo.setAttribute('position', new THREE.BufferAttribute(wavePos, 3)); waveGeo.setAttribute('color', new THREE.BufferAttribute(waveCol, 3));
+const wave = new THREE.Points(waveGeo, new THREE.PointsMaterial({ size: small ? .11 : .09, vertexColors: true, map: spriteTex([[0, 'rgba(255,255,255,1)'], [.4, 'rgba(255,255,255,.6)'], [1, 'rgba(255,255,255,0)']]),
+  transparent: true, opacity: .9, depthWrite: false, blending: THREE.AdditiveBlending, fog: false }));
+wave.position.y = -5.2; bgS.add(wave);
+let ripX = 0, ripZ = -10, ripAt = -9;
+
+// nebula clouds: big soft additive glows far behind, drifting and breathing
+const nebTex = spriteTex([[0, 'rgba(255,255,255,.55)'], [.35, 'rgba(255,255,255,.18)'], [1, 'rgba(255,255,255,0)']]);
+const nebulas = [[0x46c9d2, -9, 5, -26, 22], [0xa493ff, 7, -2, -28, 26], [0xff7a3c, 11, 7, -30, 20], [0xa493ff, -12, -6, -27, 18]].map(([c, x, y, z, sc], i) => {
+  const m = new THREE.Sprite(new THREE.SpriteMaterial({ map: nebTex, color: lin(c), transparent: true, opacity: .32, depthWrite: false, blending: THREE.AdditiveBlending, fog: false }));
+  m.position.set(x, y, z); m.scale.setScalar(sc); bgS.add(m); return { m, x, y, sc, ph: i * 1.7 }; });
+
+// shooting stars
+const stars2 = Array.from({ length: 3 }, () => { const g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.BufferAttribute(new Float32Array(6), 3));
+  const l = new THREE.Line(g, new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0, blending: THREE.AdditiveBlending, fog: false }));
+  bgS.add(l); return { l, at: -9, x: 0, y: 0, dx: 0, dy: 0 }; });
+let nextShoot = 2;
+
 // click burst + shockwave
 const bitGeos = [roundedBox(.16, .16, .16, .04, 2), new THREE.CylinderGeometry(.07, .07, .2, 6), new THREE.TorusGeometry(.08, .03, 6, 14)];
 const bitMats = [M.orange, botMats[1], botMats[2], botMats[3], M.shell, M.glowO];
@@ -857,6 +990,25 @@ function bgFrame() {
   bgSv = lerp(bgSv, scrollY - bgLastSY, .15); bgLastSY = scrollY;
   const sk = Math.max(0, 1 - (t - shakeAt) / .35); bgCam.position.x = (Math.random() - .5) * .12 * sk; bgCam.position.y = (Math.random() - .5) * .12 * sk;
   dust.position.y = scrollY * .0032; dust.rotation.y = t * .01;
+  // particle wave
+  const ph = t * .6 + scrollY * .0016, ra = Math.max(0, 1.4 * Math.exp(-(t - ripAt) * 1.1)), rt = (t - ripAt) * 9;
+  for (let i = 0; i < WN; i++) {
+    const x = waveXZ[i * 2], z = waveXZ[i * 2 + 1];
+    let y = Math.sin(x * .26 + ph) * .55 + Math.cos(z * .21 + ph * .8) * .55 + Math.sin((x + z) * .11 + t * .4) * .35;
+    if (ra > .01) { const d = Math.hypot(x - ripX, z - ripZ); y += Math.sin(d * 1.1 - rt) * ra * Math.exp(-d * .12) * (d < rt * .9 ? 1 : 0); }
+    wavePos[i * 3] = x; wavePos[i * 3 + 1] = y; wavePos[i * 3 + 2] = z;
+  }
+  waveGeo.attributes.position.needsUpdate = true;
+  wave.position.y = -5.2 + Math.min(scrollY * .0004, 1.2); wave.rotation.y = Math.sin(t * .05) * .06;
+  // nebulas breathe and drift
+  nebulas.forEach(N => { N.m.position.x = N.x + Math.sin(t * .05 + N.ph) * 2; N.m.position.y = N.y + Math.cos(t * .04 + N.ph) * 1.5 - scrollY * .0008;
+    N.m.material.opacity = .26 + Math.sin(t * .3 + N.ph) * .08; N.m.scale.setScalar(N.sc * (1 + Math.sin(t * .2 + N.ph) * .06)); });
+  // shooting stars
+  if (!reduce && t > nextShoot) { const S = stars2.find(s => t - s.at > 1) ; if (S) { S.at = t; S.x = (Math.random() - .2) * 30; S.y = 8 + Math.random() * 6; S.dx = -(14 + Math.random() * 10); S.dy = -(6 + Math.random() * 4); } nextShoot = t + 2.5 + Math.random() * 4; }
+  stars2.forEach(S => { const k = (t - S.at) / .9; if (k < 0 || k > 1) { S.l.material.opacity = 0; return; }
+    const a = S.l.geometry.attributes.position.array, hx = S.x + S.dx * k, hy = S.y + S.dy * k;
+    a[0] = hx; a[1] = hy; a[2] = -14; a[3] = hx - S.dx * .14; a[4] = hy - S.dy * .14; a[5] = -14;
+    S.l.geometry.attributes.position.needsUpdate = true; S.l.material.opacity = Math.sin(k * PI) * .9; });
   wires.forEach((W, i) => { const hh = (10 - W.z) * tanBg; W.o.position.set(W.u * hh * bgCam.aspect, W.v * hh - scrollY * (2 * hh / innerHeight) * .06, W.z);
     W.o.rotation.x = t * .1 + i; W.o.rotation.y = t * .14 + scrollY * .0012; });
   gears.forEach(G => { const hh = (10 - G.z) * tanBg; G.w.position.set(G.u * hh * bgCam.aspect, G.v * hh - scrollY * (2 * hh / innerHeight) * .05, G.z); G.w.rotation.z = G.dir * (t * .12 + scrollY * .0025); });
@@ -891,13 +1043,14 @@ addEventListener('click', e => {
   if (!bgRay.ray.intersectPlane(plane, hitP)) return;
   burst(hitP); SFX.pop();
   const t = now(); shock.position.copy(hitP); shockAt = t; shakeAt = t; surprise();
+  ripX = hitP.x * 2.2; ripZ = -8; ripAt = t;   // the particle wave ripples out from under the click
   bots.forEach(b => { const d = Math.hypot(b.g.position.x - hitP.x, b.g.position.y - hitP.y);
     if (d < 3.4) { const k = (3.4 - d) * 5 / (d + .3); b.vel.x += (b.g.position.x - hitP.x) * k; b.vel.y += (b.g.position.y - hitP.y) * k + 3; b.flipAt = t; b.happyUntil = t + 1.6; } });
-  if (direct && !e.target.closest('a,button,summary,.row,.why-card')) { say(COUSIN[cousin++ % COUSIN.length]); hop(); happyUntil = t + 1.2; }
+  if (direct && !e.target.closest('a,button,.row,.why-card,.card,.panel')) { say(COUSIN[cousin++ % COUSIN.length]); hop(); happyUntil = t + 1.2; }
 });
 
 /* ============================ every word is dynamic ============================ */
-const splitRoots = [...document.querySelectorAll('h1, main h2, main h3, .lede, main p, main li, blockquote, .facts dd, .links dd, .tag, .status, summary .meta, footer')];
+const splitRoots = [...document.querySelectorAll('h1, main h2, main h3, .lede, main p, main li, blockquote, .facts dd, .links dd, .tag, .status > span, .meta, .kind, footer')];
 const roots = splitRoots.filter(el => !splitRoots.some(o => o !== el && o.contains(el)));
 roots.forEach(root => {
   let i = 0;
@@ -906,7 +1059,7 @@ roots.forEach(root => {
       ch.textContent.split(/(\s+)/).forEach(tok => { if (!tok) return; if (/^\s+$/.test(tok)) { frag.append(tok); return; }
         const s = document.createElement('span'); s.className = 'w'; s.textContent = tok; s.style.animationDelay = Math.min(i++, 40) * 22 + 'ms'; frag.append(s); });
       ch.replaceWith(frag);
-    } else if (ch.nodeType === 1 && !ch.matches('i, .plus')) walk(ch);
+    } else if (ch.nodeType === 1 && !ch.matches('i, br')) walk(ch);
   }); })(root);
   root.classList.add('split');
 });
@@ -914,13 +1067,14 @@ const wio = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersectin
 roots.forEach(r => wio.observe(r));
 
 /* ============================ scroll-in 3D, tilt, press ============================ */
-const d3 = [...document.querySelectorAll('main h2, .card, .row, .why-card, .school, .facts, .certs, .mail, .links, .ring-wrap')];
+const d3 = [...document.querySelectorAll('main h2, .card, .row, .why-card, .panel, .certs, .gpa, .ring-wrap')];
 d3.forEach(el => el.classList.add('d3'));
 let d3Queued = false;
 function scroll3d() { d3Queued = false; const H = innerHeight;
   d3.forEach(el => { const r = el.getBoundingClientRect(), p = Math.min(Math.max((r.top - H * .8) / (H * .28), 0), 1); el.style.setProperty('--in', p.toFixed(3)); }); }
 addEventListener('scroll', () => { if (!d3Queued) { d3Queued = true; requestAnimationFrame(scroll3d); } }, { passive: true });
 addEventListener('resize', scroll3d); scroll3d();
+document.querySelectorAll('.card,.row,.why-card,.stat,.panel,.rig3d,.ring-wrap').forEach((el, i) => { el.style.setProperty('--fd', (-(i * 1.37) % 6).toFixed(2) + 's'); el.style.setProperty('--fdur', (5.2 + (i * .73) % 2.6).toFixed(2) + 's'); });
 document.querySelectorAll('.card,.row,.why-card').forEach(el => {
   el.addEventListener('pointermove', e => { if (e.pointerType !== 'mouse') return; const r = el.getBoundingClientRect();
     el.style.setProperty('--ry', ((e.clientX - r.left) / r.width - .5) * 7 + 'deg'); el.style.setProperty('--rx', -((e.clientY - r.top) / r.height - .5) * 7 + 'deg'); });
@@ -947,10 +1101,37 @@ let quietSince = performance.now(), pitchI = 0, pitchesQuiet = 0;
 setInterval(() => { if (performance.now() - quietSince > 14000 && pitchesQuiet < 2 && !bubble.classList.contains('show') && !document.hidden) {
   say(pitchI % 2 ? pick(JOKES) : PITCH[(pitchI >> 1) % PITCH.length]); pitchI++; pitchesQuiet++; hop(); quietSince = performance.now(); } }, 2000);
 
+/* ============================ hero: rotating 3D word ============================ */
+(function ticker() {
+  const el = $('#flip'); if (!el || reduce) return;
+  const words = ['RAG pipelines', 'AI agents', 'LLM chatbots', 'ML models', 'FastAPI services'];
+  let i = 0;
+  setInterval(() => { el.classList.remove('in'); el.classList.add('out');
+    setTimeout(() => { i = (i + 1) % words.length; el.textContent = words[i]; el.classList.remove('out'); void el.offsetWidth; el.classList.add('in'); }, 270); }, 2400);
+})();
+
+/* ============================ hero terminal types itself ============================ */
+(function terminal() {
+  const pre = $('#term'); if (!pre || reduce) return;
+  const lines = [['$', 'whoami'], ['', 'yash kolekar · ai/ml engineer · data scientist'], ['$', 'cat stack.txt'], ['', 'python · langgraph · rag · fastapi · docker · aws'],
+    ['$', 'uptime'], ['', '2+ years shipping ML & GenAI to production'], ['$', './hire --check'], ['ok', '✓ immediate joiner · pune / remote']];
+  let li = 0, ci = 0, html = '';
+  const esc = t => t.replace(/&/g, '&amp;').replace(/</g, '&lt;');
+  const line = (k, txt) => k === '$' ? '<span class="pr">$</span> ' + esc(txt) : k === 'ok' ? '<span class="ok">' + esc(txt) + '</span>' : esc(txt);
+  pre.innerHTML = '<span class="cur"></span>';
+  setTimeout(function step() {
+    const [k, txt] = lines[li];
+    if (k === '$') { ci++; pre.innerHTML = html + line(k, txt.slice(0, ci)) + '<span class="cur"></span>'; if (ci < txt.length) return setTimeout(step, 55 + Math.random() * 60); }
+    html += line(k, txt) + '\n'; li++; ci = 0; pre.innerHTML = html + '<span class="cur"></span>';
+    if (li < lines.length) setTimeout(step, k === '$' ? 260 : 420);
+  }, 900);
+})();
+// the terminal + stat tiles lean with the pointer (driven by --lx/--ly from Bolt's loop)
+
 /* ============================ sound toggle + copy ============================ */
-const snd = $('#snd'), paintSnd = () => { snd.textContent = soundOn ? 'sound on' : 'sound off'; snd.setAttribute('aria-pressed', soundOn); }; paintSnd();
+const snd = $('#snd'), paintSnd = () => { snd.textContent = soundOn ? 'sound on' : 'muted'; snd.setAttribute('aria-pressed', soundOn); }; paintSnd();
 snd.addEventListener('click', () => { soundOn = !soundOn; paintSnd(); try { localStorage.setItem('bolt-sound', soundOn ? 'on' : 'off'); } catch (e) {}
-  if (soundOn) { SFX.hello(); say('beep boop! sound is <b>on</b>.'); hop(); } });
+  if (soundOn) { unlockAudio(); SFX.hello(); say('beep boop! sound is <b>on</b>.'); } else say('fine. silent mode.'); hop(); });
 const toast = $('#toast'), show = m => { toast.textContent = m; toast.classList.add('show'); setTimeout(() => toast.classList.remove('show'), 1600); };
 function copyText(el, label) { navigator.clipboard.writeText(el.textContent).then(() => show(label + ' copied'))
   .catch(() => { const r = document.createRange(); r.selectNodeContents(el); getSelection().removeAllRanges(); getSelection().addRange(r); show('Selected, press Ctrl+C'); }); }
